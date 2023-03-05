@@ -1,0 +1,25 @@
+import { Router } from "express";
+import {
+  createUserController,
+  listUsersController,
+  updateUserController,
+} from "../controllers/users.controllers";
+import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
+import { ensureEmailExistsMiddleware } from "../middlewares/ensureEmailExists.middleware";
+import { ensureIsAdminMiddleware } from "../middlewares/ensureIsAdmin.middleware";
+import { ensureTokenvalidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
+import { createUserSchema } from "../schemas/users.schemas";
+export const userRoutes: Router = Router();
+userRoutes.post(
+  "",
+  ensureDataIsValidMiddleware(createUserSchema),
+  ensureEmailExistsMiddleware,
+  createUserController
+);
+userRoutes.get(
+  "",
+  ensureTokenvalidMiddleware,
+  ensureIsAdminMiddleware,
+  listUsersController
+);
+userRoutes.patch("/:id", ensureTokenvalidMiddleware, updateUserController);
