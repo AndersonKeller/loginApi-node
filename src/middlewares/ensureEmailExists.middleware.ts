@@ -16,7 +16,7 @@ export async function ensureEmailExistsMiddleware(
   });
   if (req.body.email) {
     if (findUser) {
-      throw new AppError("user already exists", 409);
+      throw new AppError("Email already exists", 409);
     }
   }
 

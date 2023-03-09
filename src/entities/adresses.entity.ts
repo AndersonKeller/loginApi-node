@@ -11,6 +11,7 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from "typeorm";
+import { RealEstate } from "./realState.entity";
 
 @Entity("adresses")
 class Address {
@@ -21,9 +22,9 @@ class Address {
   street: string;
 
   @Column({ length: 8 })
-  sizCode: string;
+  zipCode: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   number?: string;
 
   @Column({ length: 20 })
@@ -31,5 +32,9 @@ class Address {
 
   @Column({ length: 2 })
   state: string;
+
+  @OneToOne(() => RealEstate)
+  @JoinColumn()
+  realEstate: RealEstate;
 }
 export { Address };

@@ -11,7 +11,10 @@ import {
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
+  ManyToOne,
 } from "typeorm";
+import { date } from "zod";
+import { Schedule } from "./schedule.entity";
 @Entity("users")
 class User {
   @PrimaryGeneratedColumn("increment")
@@ -29,13 +32,13 @@ class User {
   @Column({ length: 120 })
   password: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "date" })
   createdAt: string;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: "date" })
   updatedAt: string;
 
-  @DeleteDateColumn({ nullable: true })
+  @DeleteDateColumn({ type: "date", nullable: true })
   deletedAt: string | null;
 
   @BeforeInsert()
@@ -43,8 +46,11 @@ class User {
   hashPassword() {
     const isEncrypted = getRounds(this.password);
     if (!isEncrypted) {
-      this.password = hashSync(this.password, 10);
+      this.password = hashSync(this.password, 9);
     }
   }
+  @ManyToOne(() => Schedule, (schedule) => schedule.user)
+  @JoinColumn()
+  schedule: Schedule;
 }
 export { User };

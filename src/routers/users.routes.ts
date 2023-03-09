@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createUserController,
+  deleteUserController,
   listUsersController,
   updateUserController,
 } from "../controllers/users.controllers";
@@ -12,8 +13,9 @@ import { createUserSchema } from "../schemas/users.schemas";
 export const userRoutes: Router = Router();
 userRoutes.post(
   "",
-  ensureDataIsValidMiddleware(createUserSchema),
   ensureEmailExistsMiddleware,
+  ensureDataIsValidMiddleware(createUserSchema),
+
   createUserController
 );
 userRoutes.get(
@@ -23,3 +25,9 @@ userRoutes.get(
   listUsersController
 );
 userRoutes.patch("/:id", ensureTokenvalidMiddleware, updateUserController);
+userRoutes.delete(
+  "/:id",
+  ensureTokenvalidMiddleware,
+  ensureIsAdminMiddleware,
+  deleteUserController
+);

@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import { createUserService } from "../services/users/createUser.service";
+import { deleteUserService } from "../services/users/deleteUser.service";
 import { listUsersService } from "../services/users/listUsers.service";
 import { updateUserService } from "../services/users/updateUser.service";
 
@@ -28,4 +29,13 @@ export async function updateUserController(
   const adminId = req.user.id;
   const newUser = await updateUserService(userData, userId, isAdmin, adminId);
   return res.status(200).json(newUser);
+}
+export async function deleteUserController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const userId: number = parseInt(req.params.id);
+  const adminId = req.user.id;
+  await deleteUserService(userId, adminId);
+  return res.status(204).send();
 }

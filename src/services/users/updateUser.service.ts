@@ -11,19 +11,19 @@ export async function updateUserService(
   isAdmin: boolean,
   adminId: number
 ): Promise<iUser> {
-  if (!isAdmin && userId !== adminId) {
-    throw new AppError("Insuficient permission", 403);
-  }
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const oldUserData = await userRepository.findOneBy({
     id: userId,
   });
-
-  const user = userRepository.create({
-    ...oldUserData,
-    ...userData,
-  });
+  if (!oldUserData) {
+    throw new AppError("User not found", 404);
+  }
+  if (!isAdmin && userId !== adminId) {
+    throw new AppError("Insufficient permission", 403);
+  }
+  const newUser: any = { ...oldUserData, ...userData };
+  const user = userRepository.create(newUser!);
 
   await userRepository.save(user);
   console.log(isAdmin);

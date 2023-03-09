@@ -1,5 +1,12 @@
 import { time } from "console";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { RealEstate } from "./realState.entity";
 import { User } from "./users.entity";
 
@@ -14,12 +21,12 @@ class Schedule {
   @Column({ type: "time" })
   hour: Date | string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.schedule)
+  @JoinColumn()
   user: User;
 
-  @ManyToOne(() => RealEstate)
+  @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)
+  @JoinColumn()
   realEstate: RealEstate;
 }
-export {
-    Schedule
-}
+export { Schedule };
