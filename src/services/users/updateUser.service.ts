@@ -19,14 +19,19 @@ export async function updateUserService(
   if (!oldUserData) {
     throw new AppError("User not found", 404);
   }
-  if (!isAdmin && userId !== adminId) {
+  if (!isAdmin) {
     throw new AppError("Insufficient permission", 403);
   }
   const newUser: any = { ...oldUserData, ...userData };
+
+  if (newUser.admin) {
+    delete newUser.admin;
+  }
+
   const user = userRepository.create(newUser!);
 
   await userRepository.save(user);
-  console.log(isAdmin);
+
   const updatedUser = returnUserSchema.parse(user);
 
   return updatedUser;

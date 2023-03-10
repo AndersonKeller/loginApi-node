@@ -19,7 +19,7 @@ export async function createSchedulesService({
     AppDataSource.getRepository(Schedule);
 
   const newScheduleCreate: iScheduleNew = { ...scheduleData, userId };
-  console.log(newScheduleCreate);
+
   const newSchedule = scheduleRepositpry.create(newScheduleCreate);
   await scheduleRepositpry.save(newSchedule);
 

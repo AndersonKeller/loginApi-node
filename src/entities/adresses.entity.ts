@@ -32,9 +32,5 @@ class Address {
 
   @Column({ length: 2 })
   state: string;
-
-  @OneToOne(() => RealEstate)
-  @JoinColumn()
-  realEstate: RealEstate;
 }
 export { Address };

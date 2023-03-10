@@ -10,12 +10,13 @@ export const createAddressSchema = z.object({
 });
 export const addressSchema = createAddressSchema.extend({
   id: z.number(),
+  realEstateId: z.number().optional(),
 });
 export const createRealEstateSchema = z.object({
   sold: z.boolean().default(false),
   value: z.number().gt(0).or(z.string()),
   size: z.number(),
-  address: createAddressSchema.optional(),
+  address: createAddressSchema,
   category: categorySchema.omit({ name: true }),
 });
 export const realEstateSchema = createRealEstateSchema.extend({
@@ -23,5 +24,29 @@ export const realEstateSchema = createRealEstateSchema.extend({
   createdAt: z.string(),
   updatedAt: z.string().optional(),
 });
+// {
+//   "id": 52,
+//   "sold": false,
+//   "value": "230.00",
+//   "size": 50,
+//   "createdAt": "2023-03-09",
+//   "updatedAt": "2023-03-09",
+//   "address": null,
+//   "category": {
+//     "id": 2,
+//     "name": "praia"
+//   }
+// },
 
-export const realEstatesSchema = realEstateSchema.array();
+export const realEstatesSchema = z
+  .object({
+    sold: z.boolean().default(false),
+    value: z.number().gt(0).or(z.string()),
+    size: z.number(),
+    address: createAddressSchema,
+    category: categorySchema.omit({ id: true }),
+    id: z.number(),
+    createdAt: z.string(),
+    updatedAt: z.string().optional(),
+  })
+  .array();

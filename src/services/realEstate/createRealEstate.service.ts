@@ -8,11 +8,14 @@ import {
   iRealEstate,
   iRealEstateCreate,
 } from "../../interfaces/realEstate.interfaces";
-import { realEstateSchema } from "../../schemas/realEstate.schemas";
+import {
+  addressSchema,
+  realEstateSchema,
+} from "../../schemas/realEstate.schemas";
 
 export async function createRealEstateService(
-  realEstateData: any,
-  addressData: any
+  realEstateData: iRealEstateCreate,
+  addressData: iAddressCreate
 ): Promise<iRealEstate> {
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
@@ -20,19 +23,35 @@ export async function createRealEstateService(
     AppDataSource.getRepository(Address);
 
   if (!realEstateData) {
-    throw new AppError("Invalid body", 400);
+    throw new AppError("Invalid body", 401);
+  }
+  const existsAddress = await addressRepository.findOneBy({
+    city: addressData.city,
+    number: addressData.number,
+    state: addressData.state,
+    street: addressData.street,
+    zipCode: addressData.zipCode,
+  });
+  if (existsAddress) {
+    throw new AppError("Address already exists", 409);
   }
   const address = addressRepository.create(addressData);
   const newAddress = await addressRepository.save(address);
+  const addressNew = addressSchema.parse(newAddress);
 
-  const realEstate = realEstateRepository.create(realEstateData);
-  await realEstateRepository.save(realEstate);
+  const findAddress: Address | null = await addressRepository.findOne({
+    where: {
+      id: addressNew.id,
+    },
+  });
 
-  const newRealEstate = {
-    address: { ...newAddress },
-    ...realEstate,
-  };
-  let newState = realEstateSchema.parse(newRealEstate);
+  const realEstate: RealEstate = realEstateRepository.create({
+    ...realEstateData,
+    address: findAddress!,
+  });
+  const newReal: RealEstate = await realEstateRepository.save(realEstate);
+
+  let newState = realEstateSchema.parse(newReal);
 
   return newState;
 }

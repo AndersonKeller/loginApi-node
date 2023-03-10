@@ -7,7 +7,6 @@ export async function deleteUserService(
   userId: number,
   adminId: number
 ): Promise<void> {
-  console.log(userId);
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const findUser: User | null = await userRepository.findOne({
     where: {

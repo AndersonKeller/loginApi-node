@@ -49,8 +49,8 @@ class User {
       this.password = hashSync(this.password, 9);
     }
   }
-  @ManyToOne(() => Schedule, (schedule) => schedule.user)
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
   @JoinColumn()
-  schedule: Schedule;
+  schedule: Schedule[];
 }
 export { User };

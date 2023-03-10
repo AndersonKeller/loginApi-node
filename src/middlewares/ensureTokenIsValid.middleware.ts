@@ -18,6 +18,6 @@ export async function ensureTokenvalidMiddleware(
       throw new AppError(error.message, 401);
     }
     request.user = { admin: decoded.admin, id: parseInt(decoded.sub) };
-    return next();
   });
+  return next();
 }

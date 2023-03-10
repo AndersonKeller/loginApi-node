@@ -11,8 +11,8 @@ export const realEstateRoutes: Router = Router();
 
 realEstateRoutes.post(
   "",
-  ensureDataIsValidMiddleware(createRealEstateSchema),
   ensureTokenvalidMiddleware,
+  ensureDataIsValidMiddleware(createRealEstateSchema),
   ensureIsAdminMiddleware,
   createRealEstateController
 );

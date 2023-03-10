@@ -16,7 +16,8 @@ export async function createRealEstateController(
     value: req.body.value,
     sold: req.body.sold,
     size: req.body.size,
-    category: req.body.category,
+    category: req.body?.category,
+    address: req.body.address,
   };
 
   const newEstate = await createRealEstateService(realEstateData, addressData);
