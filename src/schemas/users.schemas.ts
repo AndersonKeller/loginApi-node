@@ -15,6 +15,7 @@ export const returnUserSchema = createUserSchema
   })
   .omit({ password: true });
 export const returnAllUsersSchema = returnUserSchema.array();
+
 export const updateUserSchema = z.object({
   name: z.string().max(45).optional(),
   email: z.string().email().max(45).optional(),

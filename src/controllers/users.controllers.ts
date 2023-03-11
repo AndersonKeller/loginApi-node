@@ -26,8 +26,13 @@ export async function updateUserController(
   const userData = req.body;
   const userId = parseInt(req.params.id);
   const isAdmin = req.user.admin;
-  const adminId = req.user.id;
-  const newUser = await updateUserService(userData, userId, isAdmin, adminId);
+  const loggedUserId: number = req.user.id;
+  const newUser = await updateUserService(
+    userData,
+    userId,
+    isAdmin,
+    loggedUserId
+  );
   return res.status(200).json(newUser);
 }
 export async function deleteUserController(

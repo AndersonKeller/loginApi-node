@@ -24,27 +24,13 @@ export const realEstateSchema = createRealEstateSchema.extend({
   createdAt: z.string(),
   updatedAt: z.string().optional(),
 });
-// {
-//   "id": 52,
-//   "sold": false,
-//   "value": "230.00",
-//   "size": 50,
-//   "createdAt": "2023-03-09",
-//   "updatedAt": "2023-03-09",
-//   "address": null,
-//   "category": {
-//     "id": 2,
-//     "name": "praia"
-//   }
-// },
-
 export const realEstatesSchema = z
   .object({
     sold: z.boolean().default(false),
     value: z.number().gt(0).or(z.string()),
     size: z.number(),
     address: createAddressSchema,
-    category: categorySchema.omit({ id: true }),
+    category: categorySchema,
     id: z.number(),
     createdAt: z.string(),
     updatedAt: z.string().optional(),
