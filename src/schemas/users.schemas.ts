@@ -21,3 +21,4 @@ export const updateUserSchema = z.object({
   email: z.string().email().max(45).optional(),
   password: z.string().max(120).optional(),
 });
+export const returnUpdateUserSchema = returnUserSchema.omit({ admin: true });

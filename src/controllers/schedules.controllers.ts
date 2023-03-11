@@ -8,13 +8,10 @@ export async function createSchedulesController(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const scheduleData = req.body;
-  const id = req.user.id;
-  const newSchedule = await createSchedulesService({
-    scheduleData,
-    userId: id,
-  });
-  return res.status(201).json(newSchedule);
+  const scheduleData: iScheduleCreate = req.body;
+  const id: number = req.user.id;
+  const newSchedule = await createSchedulesService(scheduleData, id);
+  return res.status(201).json({ message: newSchedule });
 }
 export async function listScheduleByRealEstateController(
   req: Request,

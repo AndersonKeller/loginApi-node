@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   createUserSchema,
   returnAllUsersSchema,
+  returnUpdateUserSchema,
   returnUserSchema,
   updateUserSchema,
 } from "../schemas/users.schemas";
@@ -12,3 +13,4 @@ export type iUser = z.infer<typeof returnUserSchema>;
 export type iUsers = z.infer<typeof returnAllUsersSchema>;
 export type userUpdate = z.infer<typeof updateUserSchema>;
 export type iUserUpdate = DeepPartial<userUpdate>;
+export type iUserUpdateReturn = z.infer<typeof returnUpdateUserSchema>;

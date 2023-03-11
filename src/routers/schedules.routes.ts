@@ -20,5 +20,6 @@ schedulesRouter.post(
 schedulesRouter.get(
   "/realEstate/:id",
   ensureTokenvalidMiddleware,
+  ensureIsAdminMiddleware,
   listScheduleByRealEstateController
 );

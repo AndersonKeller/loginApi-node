@@ -15,12 +15,20 @@ export const addressSchema = createAddressSchema.extend({
 export const createRealEstateSchema = z.object({
   sold: z.boolean().default(false),
   value: z.number().gt(0).or(z.string()),
-  size: z.number(),
+  size: z.number().gt(0),
   address: createAddressSchema,
-  category: categorySchema.omit({ name: true }),
+  category: categorySchema.omit({ name: true }).optional().default({ id: 1 }),
 });
 export const realEstateSchema = createRealEstateSchema.extend({
   id: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string().optional(),
+});
+export const returnRealEstateSchema = z.object({
+  category: categorySchema,
+  id: z.number(),
+  size: z.number().gt(0),
+  value: z.number().gt(0),
   createdAt: z.string(),
   updatedAt: z.string().optional(),
 });
