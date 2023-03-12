@@ -18,10 +18,7 @@ export const createRealEstateSchema = z.object({
   value: z.number().gt(0).or(z.string()),
   size: z.number().gt(0),
   address: createAddressSchema,
-  categoryToCreate: categorySchema
-    .omit({ id: true })
-    .optional()
-    .default({ name: "" }),
+  categoryId: z.number().optional(),
 });
 export const realEstateSchema = createRealEstateSchema.extend({
   id: z.number(),

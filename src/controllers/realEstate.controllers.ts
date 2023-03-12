@@ -12,13 +12,7 @@ export async function createRealEstateController(
 ): Promise<Response> {
   const addressData: iAddressCreate = req.body.address;
 
-  const realEstateData: iRealEstateCreate = {
-    value: req.body.value,
-    sold: req.body.sold,
-    size: req.body.size,
-    categoryToCreate: req.body.categoryToCreate,
-    address: req.body.address,
-  };
+  const realEstateData: iRealEstateCreate = req.body;
 
   const newEstate = await createRealEstateService(realEstateData, addressData);
 

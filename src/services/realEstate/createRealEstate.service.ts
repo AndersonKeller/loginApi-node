@@ -2,13 +2,14 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
-import { iCategoryCreate } from "../../interfaces/categories.interfaces";
 import {
-  iAddress,
+  iCategory,
+  iCategoryCreate,
+} from "../../interfaces/categories.interfaces";
+import {
   iAddressCreate,
   iRealEstate,
   iRealEstateCreate,
-  iRealEstateReturnCreate,
   iRealWithoutAddress,
 } from "../../interfaces/realEstate.interfaces";
 import {
@@ -32,6 +33,17 @@ export async function createRealEstateService(
   if (!realEstateData) {
     throw new AppError("Invalid body", 401);
   }
+  let findCategory: iCategory | null = await categoryRepository.findOneBy({
+    id: realEstateData.categoryId!,
+  });
+  // let newCategory: iCategoryCreate;
+  // if (!findCategory) {
+  //   newCategory = categoryRepository.create({
+  //     name: realEstateData.categoryId,
+  //   });
+  //   const category = await categoryRepository.save(newCategory);
+  //   findCategory = category;
+  // }
   let existsAddress: Address | null;
   if (addressData.number) {
     existsAddress = await addressRepository.findOneBy({
@@ -53,7 +65,7 @@ export async function createRealEstateService(
     throw new AppError("Address already exists", 409);
   }
 
-  const address: any = addressRepository.create(addressData);
+  const address = addressRepository.create(addressData);
   const newAddress = await addressRepository.save(address);
   const addressNew = addressSchema.parse(newAddress);
 
@@ -62,34 +74,22 @@ export async function createRealEstateService(
       id: addressNew.id,
     },
   });
-  let findCategory = await categoryRepository.findOneBy({
-    name: realEstateData.categoryToCreate.name,
-  });
-  let newCategory: iCategoryCreate;
-  if (!findCategory) {
-    newCategory = categoryRepository.create({
-      name: realEstateData.categoryToCreate.name,
-    });
-    const category = await categoryRepository.save(newCategory);
-    findCategory = category;
-  }
 
   const realEstate: RealEstate = realEstateRepository.create({
     ...realEstateData,
     address: findAddress!,
-    category: findCategory,
+    category: findCategory!,
   });
-
   const newReal: RealEstate = await realEstateRepository.save(realEstate);
-  let newState;
+  let newState: RealEstate | iRealWithoutAddress;
 
   if (!addressData.number) {
     newState = returnWithoutAddress.parse(newReal);
-    console.log(newState);
+    //console.log(newState);
     return newState;
   } else {
-    newState = returnRealEstateSchema.parse(newReal);
-    console.log(newState);
+    newState = returnCreateRealEstateSchema.parse(newReal);
+    //console.log(newState);
     return newState;
   }
 }
