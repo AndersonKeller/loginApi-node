@@ -2,10 +2,7 @@ import { DeepPartial, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../errors";
-import {
-  iUserUpdate,
-  iUserUpdateReturn,
-} from "../../interfaces/users.interfaces";
+import { iUserUpdate } from "../../interfaces/users.interfaces";
 import { returnUserSchema } from "../../schemas/users.schemas";
 
 export async function updateUserService(
@@ -13,7 +10,7 @@ export async function updateUserService(
   userId: number,
   isAdmin: boolean,
   loggedUserId: number
-): Promise<iUserUpdateReturn> {
+): Promise<iUserUpdate> {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const oldUserData: User | null = await userRepository.findOneBy({
@@ -27,7 +24,7 @@ export async function updateUserService(
     throw new AppError("Insufficient permission", 403);
   }
 
-  const newUser: iUserUpdateReturn = { ...oldUserData, ...userData };
+  const newUser: any = { ...oldUserData, ...userData };
   delete newUser.admin;
   const user: User[] = userRepository.create(newUser!);
 
