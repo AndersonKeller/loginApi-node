@@ -27,12 +27,6 @@ export async function createSchedulesService(
   if (week === 6 || week === 0) {
     throw new AppError("Invalid date, work days are monday to friday", 400);
   }
-  const day: string = new Date(scheduleData.date).getDate().toString();
-
-  const month: string = new Date(scheduleData.date).getMonth().toString();
-
-  const year: string = new Date(scheduleData.date).getFullYear().toString();
-
   const hour: number = parseInt(scheduleData.hour.split(":")[0]);
 
   if (hour > 18 || hour < 8) {
@@ -63,7 +57,7 @@ export async function createSchedulesService(
       409
     );
   }
-  const findUserSchedule = await scheduleRepository.findOne({
+  const findUserSchedule: Schedule | null = await scheduleRepository.findOne({
     where: {
       date: scheduleData.date,
       hour: scheduleData.hour,
@@ -85,7 +79,7 @@ export async function createSchedulesService(
       realEstate: findRealEstate!,
     });
 
-  const schedule = await scheduleRepository.save(createSchedule);
+  const schedule: Schedule = await scheduleRepository.save(createSchedule);
 
   return "Schedule created";
 }

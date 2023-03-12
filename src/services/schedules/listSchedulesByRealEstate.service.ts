@@ -11,7 +11,7 @@ export async function listSchedulesByRealEsatetService(realEstateId: number) {
     AppDataSource.getRepository(RealEstate);
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const findReal = await realEstateRepository.findOne({
+  const findReal: RealEstate | null = await realEstateRepository.findOne({
     where: {
       id: realEstateId,
     },
@@ -24,7 +24,7 @@ export async function listSchedulesByRealEsatetService(realEstateId: number) {
   if (!findReal) {
     throw new AppError("RealEstate not found", 404);
   }
-  const userInSchedule = await scheduleRepository.find({
+  const userInSchedule: Schedule[] = await scheduleRepository.find({
     where: {
       realEstate: {
         id: realEstateId,
