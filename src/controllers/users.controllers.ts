@@ -1,4 +1,5 @@
 import { Request, response, Response } from "express";
+import { iUserUpdate } from "../interfaces/users.interfaces";
 import { createUserService } from "../services/users/createUser.service";
 import { deleteUserService } from "../services/users/deleteUser.service";
 import { listUsersService } from "../services/users/listUsers.service";
@@ -24,10 +25,10 @@ export async function updateUserController(
   res: Response
 ): Promise<Response> {
   const userData = req.body;
-  const userId = parseInt(req.params.id);
-  const isAdmin = req.user.admin;
+  const userId: number = parseInt(req.params.id);
+  const isAdmin: boolean = req.user.admin;
   const loggedUserId: number = req.user.id;
-  const newUser = await updateUserService(
+  const newUser: iUserUpdate = await updateUserService(
     userData,
     userId,
     isAdmin,
@@ -40,9 +41,9 @@ export async function deleteUserController(
   res: Response
 ): Promise<Response> {
   const userId: number = parseInt(req.params.id);
-  const adminId = req.user.id;
-  const loggedId = req.user.id;
-  const isAdmin = req.user.admin;
+  const adminId: number = req.user.id;
+  const loggedId: number = req.user.id;
+  const isAdmin: boolean = req.user.admin;
   await deleteUserService(userId, adminId, loggedId, isAdmin);
   return res.status(204).send();
 }

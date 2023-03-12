@@ -1,17 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeleteDateColumn,
-  OneToOne,
-  JoinColumn,
-  OneToMany,
-  BeforeInsert,
-  BeforeUpdate,
-} from "typeorm";
-import { RealEstate } from "./realState.entity";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("adresses")
 class Address {

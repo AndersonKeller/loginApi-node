@@ -6,7 +6,7 @@ export async function ensureIsAdminMiddleware(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
-  const isAdmin = req.user.admin;
+  const isAdmin: boolean = req.user.admin;
 
   if (!isAdmin) {
     throw new AppError("Insufficient permission", 403);

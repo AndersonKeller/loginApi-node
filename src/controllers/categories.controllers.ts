@@ -1,12 +1,10 @@
-import {
-  iCategory,
-  iCategoryCreate,
-} from "../interfaces/categories.interfaces";
+import { iCategoryCreate } from "../interfaces/categories.interfaces";
 import { Request, Response } from "express";
 import { createCategoryService } from "../services/categories/createCategory.service";
 import { listCategoriesService } from "../services/categories/listCategories.service";
-import { iRealEstates } from "../interfaces/realEstate.interfaces";
+
 import { listRealEstateByCategoryService } from "../services/categories/listRealEstateByCategory.service";
+import { Category } from "../entities";
 
 export async function createCategoryController(
   req: Request,
@@ -28,6 +26,8 @@ export async function listRealEstateByCategoryController(
   res: Response
 ): Promise<Response> {
   const categoryId: number = parseInt(req.params.id);
-  const realStates = await listRealEstateByCategoryService(categoryId);
+  const realStates: Category = await listRealEstateByCategoryService(
+    categoryId
+  );
   return res.status(200).json(realStates);
 }

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { RealEstate } from "../entities";
 import { iRealEstates } from "../interfaces/realEstate.interfaces";
 import { iScheduleCreate } from "../interfaces/schedules.interfaces";
 import { createSchedulesService } from "../services/schedules/createSchedules.service";
@@ -18,6 +19,8 @@ export async function listScheduleByRealEstateController(
   res: Response
 ): Promise<Response> {
   const scheduleId: number = parseInt(req.params.id);
-  const schedules = await listSchedulesByRealEsatetService(scheduleId);
+  const schedules: RealEstate = await listSchedulesByRealEsatetService(
+    scheduleId
+  );
   return res.status(200).json(schedules);
 }

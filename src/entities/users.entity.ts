@@ -6,12 +6,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  OneToOne,
   JoinColumn,
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
-  ManyToOne,
 } from "typeorm";
 import { date } from "zod";
 import { Schedule } from "./schedule.entity";
