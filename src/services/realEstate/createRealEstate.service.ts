@@ -4,8 +4,6 @@ import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
 import { iCategory } from "../../interfaces/categories.interfaces";
 import {
-  iAddress,
-  iAddressCreate,
   iRealEstateCreate,
   iRealWithoutAddress,
 } from "../../interfaces/realEstate.interfaces";

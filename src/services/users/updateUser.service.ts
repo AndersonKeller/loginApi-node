@@ -3,8 +3,6 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../errors";
 import {
-  iUser,
-  iUserCreate,
   iUserUpdate,
   iUserUpdateReturn,
 } from "../../interfaces/users.interfaces";

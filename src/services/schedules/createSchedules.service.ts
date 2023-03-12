@@ -3,15 +3,9 @@ import { AppDataSource } from "../../data-source";
 import { RealEstate, Schedule, User } from "../../entities";
 import { AppError } from "../../errors";
 import {
-  iSchedule,
   iScheduleCreate,
   iScheduleWhitUser,
 } from "../../interfaces/schedules.interfaces";
-import {
-  createScheduleSchema,
-  returnScheduleSchema,
-  scheduleSchema,
-} from "../../schemas/schedules.schemas";
 
 export async function createSchedulesService(
   scheduleData: iScheduleCreate,

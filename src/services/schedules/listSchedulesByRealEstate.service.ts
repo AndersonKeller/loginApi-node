@@ -1,4 +1,3 @@
-import { userInfo } from "os";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { RealEstate, Schedule, User } from "../../entities";

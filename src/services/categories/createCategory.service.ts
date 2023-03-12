@@ -6,10 +6,7 @@ import {
   iCategory,
   iCategoryCreate,
 } from "../../interfaces/categories.interfaces";
-import {
-  categorySchema,
-  createCategorySchema,
-} from "../../schemas/categories.schemas";
+import { categorySchema } from "../../schemas/categories.schemas";
 
 export async function createCategoryService(
   categoryData: iCategoryCreate
