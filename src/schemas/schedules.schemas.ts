@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { realEstateSchema } from "./realEstate.schemas";
+import { categorySchema } from "./categories.schemas";
+import { addressSchema, realEstateSchema } from "./realEstate.schemas";
 import { returnUserSchema } from "./users.schemas";
 
 export const createScheduleSchema = z.object({
@@ -29,4 +30,13 @@ export const returnScheduleSchema = z.object({
     updatedAt: true,
   }),
   realEstateId: realEstateSchema.pick({ id: true }),
+});
+export const returnScheduleByRealEstateSchema = z.object({
+  id: z.number(),
+  address: addressSchema,
+  category: categorySchema,
+  user: returnUserSchema,
+  realEstate: realEstateSchema,
+  date: z.string(),
+  hour: z.string(),
 });

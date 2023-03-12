@@ -8,10 +8,7 @@ import {
   iUserUpdate,
   iUserUpdateReturn,
 } from "../../interfaces/users.interfaces";
-import {
-  returnUpdateUserSchema,
-  returnUserSchema,
-} from "../../schemas/users.schemas";
+import { returnUserSchema } from "../../schemas/users.schemas";
 
 export async function updateUserService(
   userData: iUserUpdate,
@@ -39,6 +36,6 @@ export async function updateUserService(
   await userRepository.save(user);
 
   const updatedUser = returnUserSchema.parse(user);
-
+  updatedUser.admin = oldUserData.admin;
   return updatedUser;
 }

@@ -25,9 +25,4 @@ userRoutes.get(
   listUsersController
 );
 userRoutes.patch("/:id", ensureTokenvalidMiddleware, updateUserController);
-userRoutes.delete(
-  "/:id",
-  ensureTokenvalidMiddleware,
-  ensureIsAdminMiddleware,
-  deleteUserController
-);
+userRoutes.delete("/:id", ensureTokenvalidMiddleware, deleteUserController);

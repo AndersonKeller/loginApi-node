@@ -41,6 +41,8 @@ export async function deleteUserController(
 ): Promise<Response> {
   const userId: number = parseInt(req.params.id);
   const adminId = req.user.id;
-  await deleteUserService(userId, adminId);
+  const loggedId = req.user.id;
+  const isAdmin = req.user.admin;
+  await deleteUserService(userId, adminId, loggedId, isAdmin);
   return res.status(204).send();
 }

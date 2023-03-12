@@ -14,11 +14,8 @@ export async function listRealStatesService(): Promise<iRealEstates> {
   const realStates: any = await realEstateRepository.find({
     relations: {
       address: true,
-      category: true,
     },
   });
 
-  const allRealEstates: iRealEstates = realEstatesSchema.parse(realStates);
-
-  return allRealEstates;
+  return realStates;
 }

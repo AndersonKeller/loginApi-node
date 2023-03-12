@@ -28,11 +28,11 @@ export async function createSchedulesService(
     throw new AppError("Invalid date, work days are monday to friday", 400);
   }
   const day: string = new Date(scheduleData.date).getDate().toString();
-  //console.log(day);
+
   const month: string = new Date(scheduleData.date).getMonth().toString();
-  //console.log(month);
+
   const year: string = new Date(scheduleData.date).getFullYear().toString();
-  //console.log(year);
+
   const hour: number = parseInt(scheduleData.hour.split(":")[0]);
 
   if (hour > 18 || hour < 8) {
@@ -48,15 +48,44 @@ export async function createSchedulesService(
   const findUser: User | null = await userRepository.findOneBy({
     id: userId,
   });
-  const creteSchedule: Schedule | iScheduleWhitUser = scheduleRepository.create(
-    {
+  const findSchedule: Schedule | null = await scheduleRepository.findOne({
+    where: {
+      date: scheduleData.date,
+      hour: scheduleData.hour,
+      realEstate: {
+        id: findRealEstate.id,
+      },
+    },
+  });
+  if (findSchedule) {
+    throw new AppError(
+      "Schedule to this real estate at this date and time already exists",
+      409
+    );
+  }
+  const findUserSchedule = await scheduleRepository.findOne({
+    where: {
+      date: scheduleData.date,
+      hour: scheduleData.hour,
+      user: {
+        id: userId,
+      },
+    },
+  });
+  if (findUserSchedule) {
+    throw new AppError(
+      "User schedule to this real estate at this date and time already exists",
+      409
+    );
+  }
+  const createSchedule: Schedule | iScheduleWhitUser =
+    scheduleRepository.create({
       ...scheduleData,
       user: findUser!,
       realEstate: findRealEstate!,
-    }
-  );
-  const schedule = await scheduleRepository.save(creteSchedule);
-  // const newScheduleCreate = returnScheduleSchema.parse(schedule);
-  // console.log(newScheduleCreate);
+    });
+
+  const schedule = await scheduleRepository.save(createSchedule);
+
   return "Schedule created";
 }

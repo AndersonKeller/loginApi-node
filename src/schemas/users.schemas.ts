@@ -3,7 +3,7 @@ import { z } from "zod";
 export const createUserSchema = z.object({
   name: z.string().max(45),
   email: z.string().email().max(45),
-  admin: z.boolean().default(false),
+  admin: z.boolean().optional().default(false),
   password: z.string().max(120),
 });
 export const returnUserSchema = createUserSchema
@@ -21,4 +21,3 @@ export const updateUserSchema = z.object({
   email: z.string().email().max(45).optional(),
   password: z.string().max(120).optional(),
 });
-export const returnUpdateUserSchema = returnUserSchema.omit({ admin: true });

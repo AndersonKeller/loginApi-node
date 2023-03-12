@@ -16,7 +16,7 @@ export async function createRealEstateController(
     value: req.body.value,
     sold: req.body.sold,
     size: req.body.size,
-    category: req.body?.category,
+    categoryToCreate: req.body.categoryToCreate,
     address: req.body.address,
   };
 
