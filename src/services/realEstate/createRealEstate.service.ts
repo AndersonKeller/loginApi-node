@@ -2,21 +2,14 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
+import { iCategory } from "../../interfaces/categories.interfaces";
 import {
-  iCategory,
-  iCategoryCreate,
-} from "../../interfaces/categories.interfaces";
-import {
-  iAddressCreate,
-  iRealEstate,
   iRealEstateCreate,
   iRealWithoutAddress,
 } from "../../interfaces/realEstate.interfaces";
 import {
   addressSchema,
-  realEstateSchema,
   returnCreateRealEstateSchema,
-  returnRealEstateSchema,
   returnWithoutAddress,
 } from "../../schemas/realEstate.schemas";
 
@@ -36,14 +29,9 @@ export async function createRealEstateService(
   let findCategory: iCategory | null = await categoryRepository.findOneBy({
     id: realEstateData.categoryId!,
   });
-  // let newCategory: iCategoryCreate;
-  // if (!findCategory) {
-  //   newCategory = categoryRepository.create({
-  //     name: realEstateData.categoryId,
-  //   });
-  //   const category = await categoryRepository.save(newCategory);
-  //   findCategory = category;
-  // }
+  if (!findCategory) {
+    throw new AppError("Category not found", 404);
+  }
   let existsAddress: Address | null;
   if (addressData.number) {
     existsAddress = await addressRepository.findOneBy({
@@ -66,7 +54,7 @@ export async function createRealEstateService(
   }
 
   const address = addressRepository.create(addressData);
-  const newAddress = await addressRepository.save(address);
+  const newAddress: Address[] = await addressRepository.save(address);
   const addressNew = addressSchema.parse(newAddress);
 
   const findAddress: Address | null = await addressRepository.findOne({
@@ -85,11 +73,11 @@ export async function createRealEstateService(
 
   if (!addressData.number) {
     newState = returnWithoutAddress.parse(newReal);
-    //console.log(newState);
+
     return newState;
   } else {
     newState = returnCreateRealEstateSchema.parse(newReal);
-    //console.log(newState);
+
     return newState;
   }
 }
