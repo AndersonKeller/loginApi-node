@@ -4,6 +4,8 @@ import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
 import { iCategory } from "../../interfaces/categories.interfaces";
 import {
+  iAddress,
+  iAddressCreate,
   iRealEstateCreate,
   iRealWithoutAddress,
 } from "../../interfaces/realEstate.interfaces";
@@ -53,7 +55,7 @@ export async function createRealEstateService(
     throw new AppError("Address already exists", 409);
   }
 
-  const address = addressRepository.create(addressData);
+  const address: Address[] = addressRepository.create(addressData);
   const newAddress: Address[] = await addressRepository.save(address);
   const addressNew = addressSchema.parse(newAddress);
 

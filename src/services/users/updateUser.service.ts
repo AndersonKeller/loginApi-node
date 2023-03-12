@@ -18,7 +18,7 @@ export async function updateUserService(
 ): Promise<iUserUpdateReturn> {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const oldUserData = await userRepository.findOneBy({
+  const oldUserData: User | null = await userRepository.findOneBy({
     id: userId,
   });
 
@@ -29,9 +29,9 @@ export async function updateUserService(
     throw new AppError("Insufficient permission", 403);
   }
 
-  const newUser: any = { ...oldUserData, ...userData };
+  const newUser: iUserUpdateReturn = { ...oldUserData, ...userData };
   delete newUser.admin;
-  const user = userRepository.create(newUser!);
+  const user: User[] = userRepository.create(newUser!);
 
   await userRepository.save(user);
 
