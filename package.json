@@ -2,7 +2,7 @@
   "name": "sprint6",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:Kenzie-Academy-Brasil-Developers/m4-t14-kimoveis-AndersonKeller.git",
+  "repository": "git@github.com:AndersonKeller/loginApi-node.git",
   "author": "<andersonkellervendas@hotmail.com>",
   "license": "MIT",
   "scripts": {
