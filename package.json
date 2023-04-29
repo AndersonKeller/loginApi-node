@@ -1,7 +1,7 @@
 {
   "name": "sprint6",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/server.ts",
   "repository": "git@github.com:AndersonKeller/loginApi-node.git",
   "author": "<andersonkellervendas@hotmail.com>",
   "license": "MIT",
