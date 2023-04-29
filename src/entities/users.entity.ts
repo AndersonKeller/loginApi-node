@@ -6,13 +6,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  JoinColumn,
-  OneToMany,
   BeforeInsert,
   BeforeUpdate,
 } from "typeorm";
-import { date } from "zod";
-import { Schedule } from "./schedule.entity";
+
 @Entity("users")
 class User {
   @PrimaryGeneratedColumn("increment")
@@ -47,8 +44,5 @@ class User {
       this.password = hashSync(this.password, 9);
     }
   }
-  @OneToMany(() => Schedule, (schedule) => schedule.user)
-  @JoinColumn()
-  schedule: Schedule[];
 }
 export { User };
