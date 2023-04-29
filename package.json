@@ -27,6 +27,7 @@
     "ts-jest": "^28.0.8",
     "typeorm": "0.3.10",
     "zod": "^3.21.0",
+    "@types/jsonwebtoken": "^9.0.1",
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
