@@ -1,9 +1,11 @@
 import { Request, response, Response } from "express";
-import { iUserUpdate } from "../interfaces/users.interfaces";
+import { iUser, iUserUpdate } from "../interfaces/users.interfaces";
 import { createUserService } from "../services/users/createUser.service";
 import { deleteUserService } from "../services/users/deleteUser.service";
 import { listUsersService } from "../services/users/listUsers.service";
 import { updateUserService } from "../services/users/updateUser.service";
+import { retriveUSerService } from "../services/users/retriveUser.service";
+import { User } from "../entities";
 
 export async function createUserController(
   req: Request,
@@ -46,4 +48,13 @@ export async function deleteUserController(
   const isAdmin: boolean = req.user.admin;
   await deleteUserService(userId, adminId, loggedId, isAdmin);
   return res.status(204).send();
+}
+export async function retriveOwnerController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const userId = req.user.id;
+  console.log(userId);
+  const user: User | undefined = await retriveUSerService(userId);
+  return res.status(200).json(user);
 }

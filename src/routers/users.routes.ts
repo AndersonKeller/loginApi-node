@@ -3,6 +3,7 @@ import {
   createUserController,
   deleteUserController,
   listUsersController,
+  retriveOwnerController,
   updateUserController,
 } from "../controllers/users.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
@@ -24,5 +25,6 @@ userRoutes.get(
   ensureIsAdminMiddleware,
   listUsersController
 );
+userRoutes.get("/retrive", ensureTokenvalidMiddleware, retriveOwnerController);
 userRoutes.patch("/:id", ensureTokenvalidMiddleware, updateUserController);
 userRoutes.delete("/:id", ensureTokenvalidMiddleware, deleteUserController);
