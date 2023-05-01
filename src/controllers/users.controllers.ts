@@ -54,7 +54,6 @@ export async function retriveOwnerController(
   res: Response
 ): Promise<Response> {
   const userId = req.user.id;
-  console.log(userId);
   const user: User | undefined = await retriveUSerService(userId);
   return res.status(200).json(user);
 }
