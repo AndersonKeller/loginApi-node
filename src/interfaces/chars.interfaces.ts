@@ -1,4 +1,5 @@
 import { z } from "zod";
-import { createCharSchema } from "../schemas/chars.schemas";
+import { charSchema, createCharSchema } from "../schemas/chars.schemas";
 
 export type iCharCreate = z.infer<typeof createCharSchema>;
+export type iChar = z.infer<typeof charSchema>;

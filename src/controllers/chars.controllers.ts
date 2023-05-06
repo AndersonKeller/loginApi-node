@@ -8,6 +8,7 @@ export async function createCharControler(
   res: Response
 ): Promise<Response> {
   const charData = req.body;
-  const char: iCharCreate = await createCharService(charData);
+  charData.user = req.user;
+  const char: iCharCreate = await createCharService(charData, req.user.id);
   return res.status(201).json(char);
 }
