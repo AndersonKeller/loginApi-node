@@ -13,7 +13,7 @@ class Race {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 52 })
+  @Column({ length: 52, unique: true })
   name: string;
   @Column()
   description: string;
