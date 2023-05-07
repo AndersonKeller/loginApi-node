@@ -1,5 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import { User } from "./users.entity";
+import { Classes } from "./classes.entity";
+import { Race } from "./races.entity";
 
 @Entity("chars")
 class Char {
@@ -9,11 +18,13 @@ class Char {
   @Column({ length: 52 })
   name: string;
 
-  @Column({ length: 15 })
-  race: string;
+  @OneToOne(() => Classes)
+  @JoinColumn()
+  classe: Classes;
 
-  @Column({ length: 22 })
-  class: string;
+  @OneToOne(() => Race)
+  @JoinColumn()
+  race: Race;
 
   @ManyToOne(() => User)
   user: User;

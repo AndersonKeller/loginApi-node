@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { Classes } from "./classes.entity";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("stats")
 class Stats {

@@ -8,8 +8,8 @@ import {
 } from "typeorm";
 import { Stats } from "./stats.entity";
 
-@Entity("classes")
-class Classes {
+@Entity("races")
+class Race {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -17,9 +17,9 @@ class Classes {
   name: string;
   @Column()
   description: string;
-
   @OneToOne(() => Stats)
   @JoinColumn()
   stats: Stats;
 }
-export { Classes };
+
+export { Race };

@@ -13,7 +13,7 @@ export async function createCharService(
 
   const user: User | null = await userRepository.findOneBy({ id: idUser });
   charData.user = user!;
-  const char: iChar = charRepository.create(charData);
+  const char: any = charRepository.create(charData);
   await charRepository.save(char);
 
   const newChar = charSchema.parse(char);
