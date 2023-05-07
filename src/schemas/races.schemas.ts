@@ -9,3 +9,6 @@ export const createRaceSchema = z.object({
 export const raceSchema = createRaceSchema.extend({
   id: z.number(),
 });
+export const createRaceCharSchema = z.object({
+  name: z.string(),
+});
