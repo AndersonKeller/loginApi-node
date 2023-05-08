@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Char, Classes, Race, User } from "../../entities";
 import { iChar, iCharCreate } from "../../interfaces/chars.interfaces";
-import { iClasses } from "../../interfaces/classes.interfaces";
+import { iClasse } from "../../interfaces/classes.interfaces";
 import { AppError } from "../../errors";
 import { iRace } from "../../interfaces/races.interfaces";
 import { returnCharSchema } from "../../schemas/chars.schemas";
@@ -19,7 +19,7 @@ export async function createCharService(
 
   const user: User | null = await userRepository.findOneBy({ id: idUser });
 
-  const classesFind: iClasses | null = await classesRepository.findOne({
+  const classesFind: iClasse | null = await classesRepository.findOne({
     where: {
       name: charData.classe,
     },

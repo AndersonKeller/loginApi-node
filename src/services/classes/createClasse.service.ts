@@ -1,4 +1,4 @@
-import { iClasses, iClassesCreate } from "../../interfaces/classes.interfaces";
+import { iClasse, iClassesCreate } from "../../interfaces/classes.interfaces";
 import { Repository } from "typeorm";
 
 import { AppDataSource } from "../../data-source";
@@ -7,7 +7,7 @@ import { iStatsCreate } from "../../interfaces/stats.interfaces";
 import { classesSchema } from "../../schemas/classes.schemas";
 export async function createClasseService(
   classeData: iClassesCreate
-): Promise<iClasses> {
+): Promise<iClasse> {
   const classesRepository: Repository<Classes> =
     AppDataSource.getRepository(Classes);
   const statsRepository: Repository<Stats> = AppDataSource.getRepository(Stats);
@@ -24,6 +24,6 @@ export async function createClasseService(
     stats: findStats!,
   });
   await classesRepository.save(classe);
-  const newClasse: iClasses = classesSchema.parse(classe);
+  const newClasse: iClasse = classesSchema.parse(classe);
   return newClasse;
 }

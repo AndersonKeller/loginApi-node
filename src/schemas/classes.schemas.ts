@@ -9,3 +9,4 @@ export const createClassesSchema = z.object({
 export const classesSchema = createClassesSchema.extend({
   id: z.number(),
 });
+export const returnAllClassesSchema = classesSchema.array();
