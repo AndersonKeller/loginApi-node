@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createRacesController } from "../controllers/races.controllers";
+import {
+  createRacesController,
+  getAllRacesController,
+} from "../controllers/races.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 
 import { ensureNameIsUnique } from "../middlewares/ensureNameIsUnique.middleware";
@@ -11,3 +14,4 @@ racesRoutes.post(
   ensureNameIsUnique,
   createRacesController
 );
+racesRoutes.get("", getAllRacesController);
