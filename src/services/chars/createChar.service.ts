@@ -10,7 +10,7 @@ import { returnCharSchema } from "../../schemas/chars.schemas";
 export async function createCharService(
   charData: iCharCreate,
   idUser: number
-): Promise<iChar> {
+): Promise<any> {
   const charRepository: Repository<Char> = AppDataSource.getRepository(Char);
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const classesRepository: Repository<Classes> =
@@ -41,6 +41,12 @@ export async function createCharService(
   if (!raceFind) {
     throw new AppError("Race not find", 404);
   }
+
+  const newStats = {
+    strength: classesFind.stats.strength + raceFind.stats.strength,
+    dexterity: classesFind.stats.dexterity + raceFind.stats.dexterity,
+    inteligence: classesFind.stats.inteligence + raceFind.stats.inteligence,
+  };
   let newChar = {
     name: charData.name,
     user: user!,
@@ -48,8 +54,10 @@ export async function createCharService(
     classe: classesFind,
   };
 
-  const char: Char = charRepository.create(newChar);
+  console.log(newChar);
+  const char: any = charRepository.create(newChar);
   await charRepository.save(char);
+  char.stats = newStats;
   const createChar: iChar = returnCharSchema.parse(char);
   return createChar;
 }
