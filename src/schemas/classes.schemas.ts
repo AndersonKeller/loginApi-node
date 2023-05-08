@@ -9,6 +9,3 @@ export const createClassesSchema = z.object({
 export const classesSchema = createClassesSchema.extend({
   id: z.number(),
 });
-export const createClassesCharSchema = z.object({
-  name: z.string(),
-});

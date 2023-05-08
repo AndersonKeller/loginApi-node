@@ -18,8 +18,7 @@ class Classes {
   @Column()
   description: string;
 
-  @OneToOne(() => Stats)
-  @JoinColumn()
+  @ManyToOne(() => Stats)
   stats: Stats;
 }
 export { Classes };

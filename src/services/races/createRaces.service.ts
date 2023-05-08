@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { iClasses, iClassesCreate } from "../../interfaces/classes.interfaces";
+
 import { AppDataSource } from "../../data-source";
 import { Race, Stats } from "../../entities";
 

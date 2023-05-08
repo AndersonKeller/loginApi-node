@@ -9,7 +9,7 @@ export async function getAllRacesService(): Promise<iRaces> {
     relations: { stats: true },
   });
 
-  const allRaces = returnAllRacesSchema.parse(races);
+  const allRaces: iRaces = returnAllRacesSchema.parse(races);
 
   return allRaces;
 }

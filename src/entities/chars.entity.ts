@@ -5,6 +5,7 @@ import {
   ManyToOne,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { User } from "./users.entity";
 import { Classes } from "./classes.entity";
@@ -18,12 +19,10 @@ class Char {
   @Column({ length: 52 })
   name: string;
 
-  @OneToOne(() => Classes)
-  @JoinColumn()
+  @ManyToOne(() => Classes)
   classe: Classes;
 
-  @OneToOne(() => Race)
-  @JoinColumn()
+  @ManyToOne(() => Race)
   race: Race;
 
   @ManyToOne(() => User)

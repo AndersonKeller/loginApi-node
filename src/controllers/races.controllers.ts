@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { createRacesService } from "../services/races/createRaces.service";
 import { getAllRacesService } from "../services/races/getAllRaces.service";
+import { iRacecreate } from "../interfaces/races.interfaces";
 export async function createRacesController(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const newRace = await createRacesService(req.body);
+  const newRace: iRacecreate = await createRacesService(req.body);
   return res.status(201).json(newRace);
 }
 export async function getAllRacesController(

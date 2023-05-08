@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { createCharService } from "../services/chars/createChar.service";
-import { iCharCreate } from "../interfaces/chars.interfaces";
+import { iChar } from "../interfaces/chars.interfaces";
 
 export async function createCharControler(
   req: Request,
@@ -9,6 +9,6 @@ export async function createCharControler(
 ): Promise<Response> {
   const charData = req.body;
   charData.user = req.user;
-  const char: iCharCreate = await createCharService(charData, req.user.id);
+  const char: iChar = await createCharService(charData, req.user.id);
   return res.status(201).json(char);
 }

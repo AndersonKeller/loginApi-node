@@ -17,8 +17,7 @@ class Race {
   name: string;
   @Column()
   description: string;
-  @OneToOne(() => Stats)
-  @JoinColumn()
+  @ManyToOne(() => Stats)
   stats: Stats;
 }
 
