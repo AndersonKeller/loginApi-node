@@ -10,6 +10,7 @@ import {
 import { User } from "./users.entity";
 import { Classes } from "./classes.entity";
 import { Race } from "./races.entity";
+import { Stats } from "./stats.entity";
 
 @Entity("chars")
 class Char {
@@ -27,5 +28,7 @@ class Char {
 
   @ManyToOne(() => User)
   user: User;
+  @ManyToOne(() => Stats)
+  stats: Stats;
 }
 export { Char };

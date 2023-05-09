@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Char } from "./chars.entity";
 
 @Entity("stats")
 class Stats {
@@ -14,22 +15,40 @@ class Stats {
   @Column()
   dexterity: number;
 
-  @Column({ nullable: true })
+  @Column()
   life: number;
 
-  @Column({ nullable: true })
+  @Column()
   mana: number;
-  @Column({ length: 12, nullable: true })
-  damage: string;
-  @Column({ nullable: true })
+
+  @Column("float")
+  damageBonus: number;
+
+  @Column()
+  damageMin: number;
+  @Column()
+  damageMax: number;
+
+  @Column("float")
   critical: number;
-  @Column({ nullable: true, length: 12 })
-  magic: string;
-  @Column({ nullable: true })
+  @Column("float")
+  magicBonus: number;
+
+  @Column()
+  magicMin: number;
+  @Column()
+  magicMax: number;
+
+  @Column("float")
   precision: number;
-  @Column({ nullable: true })
+
+  @Column("float")
   armor: number;
-  @Column({ nullable: true })
+  @Column("float")
   dodge: number;
+
+  @OneToMany(() => Char, (Char) => Char.stats)
+  stats: Char[];
 }
+
 export { Stats };
