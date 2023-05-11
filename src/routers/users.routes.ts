@@ -16,7 +16,6 @@ userRoutes.post(
   "",
   ensureEmailExistsMiddleware,
   ensureDataIsValidMiddleware(createUserSchema),
-
   createUserController
 );
 userRoutes.get(
