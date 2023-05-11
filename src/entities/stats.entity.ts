@@ -15,18 +15,18 @@ class Stats {
   @Column()
   dexterity: number;
 
-  @Column()
+  @Column("float")
   life: number;
 
-  @Column()
+  @Column("float")
   mana: number;
 
   @Column("float")
   damageBonus: number;
 
-  @Column()
+  @Column("float")
   damageMin: number;
-  @Column()
+  @Column("float")
   damageMax: number;
 
   @Column("float")
@@ -34,9 +34,9 @@ class Stats {
   @Column("float")
   magicBonus: number;
 
-  @Column()
+  @Column("float")
   magicMin: number;
-  @Column()
+  @Column("float")
   magicMax: number;
 
   @Column("float")

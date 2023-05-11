@@ -55,7 +55,6 @@ export async function createCharService(
     stats: newStats,
   };
 
-  console.log(newChar);
   const char: iChar = charRepository.create(newChar);
   await charRepository.save(char);
   const createChar: iChar = returnCharSchema.parse(char);

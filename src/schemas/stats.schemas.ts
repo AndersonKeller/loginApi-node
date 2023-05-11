@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const createStatsSchema = z.object({
-  strength: z.number(),
-  inteligence: z.number(),
-  dexterity: z.number(),
+  strength: z.number().int().optional().default(10),
+  inteligence: z.number().int().optional().default(10),
+  dexterity: z.number().int().optional().default(10),
   life: z.number().optional().default(100),
   mana: z.number().optional().default(50),
   damageBonus: z.number().optional().default(0),
