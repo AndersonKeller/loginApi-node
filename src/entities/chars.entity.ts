@@ -30,7 +30,6 @@ class Char {
 
   @ManyToOne(() => User)
   user: User;
-  @ManyToOne(() => Stats)
-  stats: Stats;
+  
 }
 export { Char };

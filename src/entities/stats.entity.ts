@@ -45,9 +45,6 @@ class Stats {
   armor: number;
   @Column("float")
   dodge: number;
-
-  @OneToMany(() => Char, (Char) => Char.stats)
-  stats: Char[];
 }
 
 export { Stats };

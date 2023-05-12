@@ -2,7 +2,7 @@ import { z } from "zod";
 import { returnUserCharSchema } from "./users.schemas";
 import { returnRaceChar } from "./races.schemas";
 import { returnClasseCharSchema } from "./classes.schemas";
-import { createStatsSchema, returnStatsCharSchema } from "./stats.schemas";
+import { returnStatsCharSchema } from "./stats.schemas";
 import { createResistenceSchema } from "./resistence.schemas";
 import { createCharsStatsSchema } from "./charStats.schemas";
 
@@ -18,7 +18,6 @@ export const returnCharSchema = z.object({
   user: returnUserCharSchema,
   race: returnRaceChar,
   classe: returnClasseCharSchema,
-  stats: returnStatsCharSchema,
   resistences: createResistenceSchema,
   charsStats: createCharsStatsSchema,
 });
