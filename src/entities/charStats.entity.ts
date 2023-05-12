@@ -1,8 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import { Char } from "./chars.entity";
 
-@Entity("stats")
-class Stats {
+@Entity("charstats")
+class CharStats {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -14,6 +21,7 @@ class Stats {
 
   @Column()
   dexterity: number;
+
   @Column("float")
   life: number;
 
@@ -45,9 +53,9 @@ class Stats {
   armor: number;
   @Column("float")
   dodge: number;
-
-  @OneToMany(() => Char, (Char) => Char.stats)
-  stats: Char[];
+  @OneToOne(() => Char)
+  @JoinColumn()
+  char: Char;
 }
 
-export { Stats };
+export { CharStats };

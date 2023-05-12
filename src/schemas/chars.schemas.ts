@@ -1,8 +1,10 @@
 import { z } from "zod";
-import { createUserSchema, returnUserSchema } from "./users.schemas";
-import { raceSchema } from "./races.schemas";
-import { classesSchema } from "./classes.schemas";
-import { createStatsSchema } from "./stats.schemas";
+import { returnUserCharSchema } from "./users.schemas";
+import { returnRaceChar } from "./races.schemas";
+import { returnClasseCharSchema } from "./classes.schemas";
+import { createStatsSchema, returnStatsCharSchema } from "./stats.schemas";
+import { createResistenceSchema } from "./resistence.schemas";
+import { createCharsStatsSchema } from "./charStats.schemas";
 
 export const createCharSchema = z.object({
   name: z.string().max(52).min(3, "name of char must be 3 characters"),
@@ -13,8 +15,10 @@ export const createCharSchema = z.object({
 export const returnCharSchema = z.object({
   name: z.string().max(52).min(3, "name of char must be 3 characters"),
   id: z.number(),
-  user: returnUserSchema,
-  race: raceSchema.omit({ stats: true }),
-  classe: classesSchema.omit({ stats: true }),
-  stats: createStatsSchema,
+  user: returnUserCharSchema,
+  race: returnRaceChar,
+  classe: returnClasseCharSchema,
+  stats: returnStatsCharSchema,
+  resistences: createResistenceSchema,
+  charsStats: createCharsStatsSchema,
 });

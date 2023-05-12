@@ -4,4 +4,5 @@ import { Classes } from "./classes.entity";
 import { Stats } from "./stats.entity";
 import { Race } from "./races.entity";
 import { Resistence } from "./resistences.entity";
-export { User, Char, Classes, Stats, Race, Resistence };
+import { CharStats } from "./charStats.entity";
+export { User, Char, Classes, Stats, Race, Resistence, CharStats };

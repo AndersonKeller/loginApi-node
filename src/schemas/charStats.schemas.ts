@@ -1,9 +1,11 @@
 import { z } from "zod";
+import { returnUserCharSchema, returnUserSchema } from "./users.schemas";
+import { returnCharSchema } from "./chars.schemas";
 
-export const createStatsSchema = z.object({
-  strength: z.number().int().optional().default(10),
-  inteligence: z.number().int().optional().default(10),
-  dexterity: z.number().int().optional().default(10),
+export const createCharsStatsSchema = z.object({
+  strength: z.number().int().optional().default(0),
+  inteligence: z.number().int().optional().default(0),
+  dexterity: z.number().int().optional().default(0),
   life: z.number().optional().default(100),
   mana: z.number().optional().default(50),
   damageBonus: z.number().optional().default(0),
@@ -17,11 +19,7 @@ export const createStatsSchema = z.object({
   armor: z.number().optional().default(0),
   dodge: z.number().optional().default(0.5),
 });
-export const statsSchema = createStatsSchema.extend({
+export const returnCharStatsSchema = createCharsStatsSchema.extend({
   id: z.number(),
-});
-export const returnStatsCharSchema = z.object({
-  strength: z.number().int().optional().default(10),
-  inteligence: z.number().int().optional().default(10),
-  dexterity: z.number().int().optional().default(10),
+  char: returnCharSchema,
 });
