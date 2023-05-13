@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createCharControler } from "../controllers/chars.controllers";
+import {
+  createCharControler,
+  getCharsController,
+} from "../controllers/chars.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { createCharSchema } from "../schemas/chars.schemas";
 import { ensureTokenvalidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
@@ -10,3 +13,4 @@ charsRoutes.post(
   ensureDataIsValidMiddleware(createCharSchema),
   createCharControler
 );
+charsRoutes.get("", ensureTokenvalidMiddleware, getCharsController);

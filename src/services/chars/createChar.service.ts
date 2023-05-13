@@ -23,7 +23,7 @@ import { iResistenceCreate } from "../../interfaces/resistence.interfaces";
 export async function createCharService(
   charData: iCharCreate,
   idUser: number
-): Promise<any> {
+): Promise<iChar> {
   const charRepository: Repository<Char> = AppDataSource.getRepository(Char);
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const classesRepository: Repository<Classes> =
@@ -63,7 +63,6 @@ export async function createCharService(
     user: user!,
     race: raceFind,
     classe: classesFind,
-    stats: classesFind.stats,
   };
   const char: any = charRepository.create(newChar);
   await charRepository.save(char);
