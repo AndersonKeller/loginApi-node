@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   createUserSchema,
   returnAllUsersSchema,
+  returnUserCharSchema,
   returnUserSchema,
   updateUserSchema,
 } from "../schemas/users.schemas";
