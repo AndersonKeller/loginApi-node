@@ -2,7 +2,6 @@ import { z } from "zod";
 import { returnUserCharSchema, returnUserSchema } from "./users.schemas";
 import { raceSchema, returnRaceChar } from "./races.schemas";
 import { classesSchema, returnClasseCharSchema } from "./classes.schemas";
-import { createStatsSchema, returnStatsCharSchema } from "./stats.schemas";
 import { createResistenceSchema } from "./resistence.schemas";
 import { createCharsStatsSchema } from "./charStats.schemas";
 
