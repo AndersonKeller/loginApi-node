@@ -9,9 +9,12 @@ import { Equip } from "./equips.entity";
 import { Spell } from "./spells.entity";
 import { CharEquips } from "./chars_equips.entity";
 import { CharSpells } from "./chars_spells.entity";
-
+import { SpellTypes } from "./spells_types";
+import { Types } from "./types.entity";
 export {
   Spell,
+  Types,
+  SpellTypes,
   User,
   Char,
   Classes,

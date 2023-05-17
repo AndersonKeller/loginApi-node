@@ -20,11 +20,15 @@ class Equip {
   @Column({ nullable: true })
   description?: string;
   @Column({ nullable: true })
-  damage?: number;
+  damageMax?: number;
+  @Column({ nullable: true })
+  damageMin?: number;
   @Column({ nullable: true })
   armor?: number;
   @Column({ nullable: true })
-  magic?: number;
+  magicMin?: number;
+  @Column({ nullable: true })
+  magicMax?: number;
   @Column()
   weigth: number;
   @OneToMany(() => CharEquips, (CharEquips) => CharEquips.equips)

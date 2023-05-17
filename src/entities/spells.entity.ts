@@ -1,13 +1,10 @@
 import {
   Column,
   Entity,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Char } from "./chars.entity";
-import { CharSpells } from "./chars_spells.entity";
 
 @Entity("spells")
 class Spell {
@@ -17,9 +14,11 @@ class Spell {
   name: string;
   @Column()
   description: string;
-  @Column()
-  type: string;
-  @OneToMany(() => CharSpells, (CharSpells) => CharSpells.spells)
-  char: CharSpells[];
+
+  // @OneToMany(() => SpellTypes, (SpellTypes) => SpellTypes.spell)
+  // type: SpellTypes;
+
+  // @OneToMany(() => CharSpells, (CharSpells) => CharSpells.spells)
+  // char: CharSpells;
 }
 export { Spell };
