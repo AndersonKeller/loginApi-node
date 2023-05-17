@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,8 +14,10 @@ class SpellTypes {
   @PrimaryGeneratedColumn("increment")
   id: number;
   @ManyToOne(() => Types)
+  @JoinColumn()
   type: Types;
   @ManyToOne(() => Spell)
+  @JoinColumn()
   spell: Spell;
 }
 export { SpellTypes };

@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { Spell } from "../../entities";
 import { AppDataSource } from "../../data-source";
+import { returnAllSpellsSchema } from "../../schemas/spells.schemas";
 
 export async function getAllSpellsService() {
   const spellsRepository: Repository<Spell> =
@@ -10,6 +11,6 @@ export async function getAllSpellsService() {
       type: true,
     },
   });
-
-  return spells;
+  const allSpells = returnAllSpellsSchema.parse(spells);
+  return allSpells;
 }

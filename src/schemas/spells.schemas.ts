@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import { createTypeSchema, returnTypeSchema } from "./types.schemas";
+import {
+  createTypeSchema,
+  returnAllTypesSchema,
+  returnTypeSchema,
+} from "./types.schemas";
 
 export const createSpellSchema = z.object({
   name: z.string().max(52),
@@ -13,3 +17,11 @@ export const returnSpellSchema = createSpellSchema
     type: returnTypeSchema,
   })
   .omit({ typeSpell: true });
+export const returnAllSpellsSchema = z
+  .object({
+    id: z.number(),
+    name: z.string().max(52),
+    description: z.string(),
+    type: returnAllTypesSchema,
+  })
+  .array();

@@ -6,3 +6,6 @@ export const createTypeSchema = z.object({
 export const returnTypeSchema = createTypeSchema.extend({
   id: z.number(),
 });
+export const returnAllTypesSchema = returnTypeSchema
+  .omit({ name: true })
+  .array();

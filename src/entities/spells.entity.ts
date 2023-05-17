@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -18,7 +19,7 @@ class Spell {
   description: string;
 
   @OneToMany(() => SpellTypes, (SpellTypes) => SpellTypes.spell)
-  type: SpellTypes;
+  type: SpellTypes[];
 
   @OneToMany(() => CharSpells, (CharSpells) => CharSpells.spells)
   char: CharSpells;

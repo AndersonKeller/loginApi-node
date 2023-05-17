@@ -39,7 +39,13 @@ export async function createSpellService(
   const spell: any = spellrepository.create(spellData);
 
   await spellrepository.save(spell);
-  spell.typeSpell = spellData.typeSpell;
+  const spellType = spellsTypesRepository.create({
+    spell: spell,
+    type: spellData.typeSpell,
+  });
+  await spellsTypesRepository.save(spellType);
+  spell.type = spellData.typeSpell;
+
   const newSpell: iSpell = returnSpellSchema.parse(spell);
   return newSpell;
 }
