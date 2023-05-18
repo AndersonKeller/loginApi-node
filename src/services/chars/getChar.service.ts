@@ -5,6 +5,7 @@ import { AppDataSource } from "../../data-source";
 import { returnCharSchema } from "../../schemas/chars.schemas";
 import { iResistenceCreate } from "../../interfaces/resistence.interfaces";
 import { iCharStatsCreate } from "../../interfaces/charStats.interfaces";
+import { AppError } from "../../errors";
 
 export async function getCharService(charId: number): Promise<iChar> {
   const charRepository: Repository<Char> = AppDataSource.getRepository(Char);
@@ -23,6 +24,9 @@ export async function getCharService(charId: number): Promise<iChar> {
       race: true,
     },
   });
+  if (!charFind) {
+    throw new AppError("char not found", 404);
+  }
   const charResistence: iResistenceCreate | null =
     await resistenceRepository.findOne({
       where: {

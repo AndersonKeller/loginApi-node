@@ -23,3 +23,4 @@ export const returnCharStatsSchema = createCharsStatsSchema.extend({
   id: z.number(),
   char: returnCharSchema,
 });
+//export const updateCharStatsSchema =

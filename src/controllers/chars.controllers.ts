@@ -4,6 +4,8 @@ import { createCharService } from "../services/chars/createChar.service";
 import { iChar, iMyChars } from "../interfaces/chars.interfaces";
 import { getCharsService } from "../services/chars/getChars.service";
 import { getCharService } from "../services/chars/getChar.service";
+import { updateCharStatsService } from "../services/chars/updateCharStats.service";
+import { iCharStatsUpdate } from "../interfaces/charStats.interfaces";
 
 export async function createCharControler(
   req: Request,
@@ -28,5 +30,17 @@ export async function getCharController(
 ): Promise<Response> {
   const charId = parseInt(req.params.id);
   const char = await getCharService(charId);
+  return res.status(200).json(char);
+}
+export async function updateCharStatsController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const statsData = req.body;
+  const char: iCharStatsUpdate = await updateCharStatsService(
+    statsData,
+    charId
+  );
   return res.status(200).json(char);
 }
