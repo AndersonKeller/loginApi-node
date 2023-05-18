@@ -6,8 +6,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Char } from "./chars.entity";
+
 import { CharEquips } from "./chars_equips.entity";
+import { equipType } from "../schemas/equips.schemas";
 
 @Entity("equips")
 class Equip {
@@ -15,8 +16,8 @@ class Equip {
   id: number;
   @Column({ length: 52 })
   name: string;
-  @Column({ length: 52 })
-  type: string;
+  @Column({ type: "enum", enum: equipType })
+  type: equipType;
   @Column({ nullable: true })
   description?: string;
   @Column({ nullable: true })
@@ -31,6 +32,8 @@ class Equip {
   magicMax?: number;
   @Column()
   weigth: number;
+  @Column()
+  cost: number;
   @OneToMany(() => CharEquips, (CharEquips) => CharEquips.equips)
   chars: CharEquips[];
 }

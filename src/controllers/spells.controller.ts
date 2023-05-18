@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { iSpell } from "../interfaces/spells.interfaces";
 import { createSpellService } from "../services/spells/createSpell.service";
 import { getAllSpellsService } from "../services/spells/getAllSpells.service";
-import { Spell } from "../entities";
+
 export async function createSpellController(
   req: Request,
   res: Response
@@ -15,6 +15,6 @@ export async function getAllSpellsControler(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const spells: Array<Spell> = await getAllSpellsService();
+  const spells: any = await getAllSpellsService();
   return res.status(200).json(spells);
 }

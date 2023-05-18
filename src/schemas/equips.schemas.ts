@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-enum equipType {
+export enum equipType {
   weapon = "WEAPON",
   armor = "ARMOR",
 }
@@ -14,6 +14,7 @@ export const createEquipSchema = z.object({
   magicMin: z.number().optional().default(0),
   magicMax: z.number().optional().default(0),
   weigth: z.number(),
+  cost: z.number(),
 });
 export const returnEquipSchema = createEquipSchema.extend({
   id: z.number(),
