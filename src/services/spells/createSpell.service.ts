@@ -1,4 +1,3 @@
-import { spellsRoutes } from "./../../routers/spells.routes";
 import { Repository } from "typeorm";
 import { iSpell, iSpellCreate } from "../../interfaces/spells.interfaces";
 import { Spell, SpellTypes, Types } from "../../entities";
@@ -20,32 +19,40 @@ export async function createSpellService(
   if (spellExists) {
     throw new AppError("Spells whit name already exists", 400);
   }
-  const typeFind: iType | null = await typeRepository.findOne({
-    where: {
-      name: spellData.typeSpell.name,
-    },
-  });
 
-  if (!typeFind) {
-    const type: iTypeCreate = typeRepository.create({
-      name: spellData.typeSpell.name,
+  spellData.typeSpell.forEach(async (typeTo) => {
+    const typeFind: iType | null = await typeRepository.findOne({
+      where: {
+        name: typeTo,
+      },
     });
-    await typeRepository.save(type);
-    spellData.typeSpell = type;
-  } else {
-    spellData.typeSpell = typeFind;
-  }
-
-  const spell: any = spellrepository.create(spellData);
-
-  await spellrepository.save(spell);
-  const spellType = spellsTypesRepository.create({
-    spell: spell,
-    type: spellData.typeSpell,
+    if (!typeFind) {
+      const type: iTypeCreate = typeRepository.create({
+        name: typeTo,
+      });
+      await typeRepository.save(type);
+    }
   });
-  await spellsTypesRepository.save(spellType);
-  spell.type = spellData.typeSpell;
+  const spell: any = spellrepository.create(spellData);
+  await spellrepository.save(spell);
 
+  spellData.typeSpell.forEach(async (type) => {
+    const typeFind: iType | null = await typeRepository.findOne({
+      where: {
+        name: type,
+      },
+      relations: {
+        spell: true,
+      },
+    });
+    const spellType = spellsTypesRepository.create({
+      spell: spell!,
+      type: typeFind!,
+    });
+    await spellsTypesRepository.save(spellType);
+  });
+
+  spell.types = spellData.typeSpell;
   const newSpell: iSpell = returnSpellSchema.parse(spell);
   return newSpell;
 }

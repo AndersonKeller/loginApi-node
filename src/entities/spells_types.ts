@@ -1,5 +1,4 @@
 import {
-  Column,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -17,7 +16,6 @@ class SpellTypes {
   @JoinColumn()
   type: Types;
   @ManyToOne(() => Spell)
-  @JoinColumn()
   spell: Spell;
 }
 export { SpellTypes };

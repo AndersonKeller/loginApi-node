@@ -1,20 +1,16 @@
 import { z } from "zod";
 
-import {
-  createTypeSchema,
-  returnAllTypesSchema,
-  returnTypeSchema,
-} from "./types.schemas";
+import { returnAllTypesSchema } from "./types.schemas";
 
 export const createSpellSchema = z.object({
   name: z.string().max(52),
   description: z.string(),
-  typeSpell: createTypeSchema,
+  typeSpell: z.string().array(),
 });
 export const returnSpellSchema = createSpellSchema
   .extend({
     id: z.number(),
-    type: returnTypeSchema,
+    types: z.string().array(),
   })
   .omit({ typeSpell: true });
 export const returnAllSpellsSchema = z
