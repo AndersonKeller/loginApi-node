@@ -39,5 +39,7 @@ class Char {
   equips: CharEquips;
   @OneToMany(() => CharSpells, (CharSpells) => CharSpells.char)
   spells: CharSpells[];
+  @OneToOne(() => CharStats)
+  stats: CharStats;
 }
 export { Char };

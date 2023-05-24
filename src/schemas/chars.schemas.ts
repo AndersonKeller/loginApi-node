@@ -24,6 +24,8 @@ export const returnAllMyCharsSchema = z
   .object({
     name: z.string(),
     id: z.number(),
+    race: returnRaceChar,
+    classe: returnClasseCharSchema,
     user: returnUserCharSchema,
   })
   .array();

@@ -9,6 +9,7 @@ export async function retriveUSerService(userId: number): Promise<User> {
   const user: User | null = await userRepository.findOne({
     where: { id: userId },
   });
+  console.log(user);
   const userReturn: any = returnUserSchema.parse(user);
   return userReturn;
 }

@@ -17,8 +17,11 @@ export async function getCharsService(idUser: number): Promise<iMyChars> {
     },
     relations: {
       user: true,
+      race: true,
+      classe: true,
     },
   });
+
   const allChars = returnAllMyCharsSchema.parse(chars);
   return allChars;
 }
