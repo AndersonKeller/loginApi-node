@@ -10,3 +10,8 @@ export const returnResistenceSchema = createResistenceSchema.extend({
   id: z.number(),
   char: returnCharSchema,
 });
+export const updateResistnceSchema = z.object({
+  fire: z.number().optional(),
+  cold: z.number().optional(),
+  lighting: z.number().optional(),
+});

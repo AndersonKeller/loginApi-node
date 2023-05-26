@@ -24,7 +24,6 @@ export async function updateCharStatsService(
     },
   });
 
-  console.log(charStatsFind);
   const newCharStats: any = {
     ...charStatsFind!,
     ...charStatsData,

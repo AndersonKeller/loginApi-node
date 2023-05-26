@@ -6,6 +6,11 @@ import { getCharsService } from "../services/chars/getChars.service";
 import { getCharService } from "../services/chars/getChar.service";
 import { updateCharStatsService } from "../services/chars/updateCharStats.service";
 import { iCharStatsUpdate } from "../interfaces/charStats.interfaces";
+import { updateResistenceService } from "../services/chars/updateresistence.servicce";
+import {
+  iResistence,
+  iUpdateResistence,
+} from "../interfaces/resistence.interfaces";
 
 export async function createCharControler(
   req: Request,
@@ -43,4 +48,16 @@ export async function updateCharStatsController(
     charId
   );
   return res.status(200).json(char);
+}
+export async function updateResistenceController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const resistenceData = req.body;
+  const resistence: iUpdateResistence = await updateResistenceService(
+    charId,
+    resistenceData
+  );
+  return res.status(200).json(resistence);
 }
