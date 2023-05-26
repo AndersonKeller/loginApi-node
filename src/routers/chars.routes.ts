@@ -4,6 +4,7 @@ import {
   createCharSpellController,
   getCharController,
   getCharsController,
+  getSpellsByCharController,
   updateCharStatsController,
   updateResistenceController,
 } from "../controllers/chars.controllers";
@@ -51,4 +52,10 @@ charsRoutes.post(
   ensureCharExistsMiddleware,
   ensureDataIsValidMiddleware(createCharSpellSchema),
   createCharSpellController
+);
+charsRoutes.get(
+  "/:id/spell",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  getSpellsByCharController
 );

@@ -13,6 +13,8 @@ import {
 } from "../interfaces/resistence.interfaces";
 import { createCharSpellService } from "../services/chars/createCharSpell.service";
 import { updateResistenceService } from "../services/chars/updateresistence.servicce";
+import { getSpellsByCharService } from "../services/chars/getSpellsByChar.service";
+import { CharSpells } from "../entities";
 
 export async function createCharControler(
   req: Request,
@@ -71,4 +73,12 @@ export async function createCharSpellController(
   const spelldata = req.body;
   const spell: iCharSpell = await createCharSpellService(charId, spelldata);
   return res.status(201).json(spell);
+}
+export async function getSpellsByCharController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId: number = parseInt(req.params.id);
+  const spells: CharSpells[] = await getSpellsByCharService(charId);
+  return res.status(200).json(spells);
 }
