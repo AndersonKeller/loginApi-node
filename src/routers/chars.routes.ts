@@ -8,7 +8,10 @@ import {
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { createCharSchema } from "../schemas/chars.schemas";
 import { ensureTokenvalidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
-import { createCharsStatsSchema } from "../schemas/charStats.schemas";
+import {
+  createCharsStatsSchema,
+  updateCharStatsSchema,
+} from "../schemas/charStats.schemas";
 export const charsRoutes: Router = Router();
 charsRoutes.post(
   "",
@@ -21,6 +24,6 @@ charsRoutes.get("/:id", ensureTokenvalidMiddleware, getCharController);
 charsRoutes.patch(
   "/:id/stats",
   ensureTokenvalidMiddleware,
-  ensureDataIsValidMiddleware(createCharsStatsSchema),
+  ensureDataIsValidMiddleware(updateCharStatsSchema),
   updateCharStatsController
 );

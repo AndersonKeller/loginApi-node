@@ -1,11 +1,7 @@
 import { Repository } from "typeorm";
-import {
-  iCharStats,
-  iCharStatsUpdate,
-} from "../../interfaces/charStats.interfaces";
-import { CharStats } from "../../entities";
+import { iCharStatsUpdate } from "../../interfaces/charStats.interfaces";
+import { Char, CharStats } from "../../entities";
 import { AppDataSource } from "../../data-source";
-import { createCharsStatsSchema } from "../../schemas/charStats.schemas";
 
 export async function updateCharStatsService(
   charStatsData: iCharStatsUpdate,
@@ -13,18 +9,29 @@ export async function updateCharStatsService(
 ): Promise<iCharStatsUpdate> {
   const charStatsRepository: Repository<CharStats> =
     AppDataSource.getRepository(CharStats);
+  const charRepository: Repository<Char> = AppDataSource.getRepository(Char);
 
-  const charStatsFind = charStatsRepository.findOne({
+  const charFind: any = await charRepository.findOneBy({
+    id: charId,
+  });
+
+  const charStatsFind: CharStats | null = await charStatsRepository.findOne({
     where: {
-      id: charId,
+      char: charFind!,
+    },
+    relations: {
+      char: true,
     },
   });
+
+  console.log(charStatsFind);
   const newCharStats: any = {
-    ...charStatsFind,
+    ...charStatsFind!,
     ...charStatsData,
   };
-  const charStats = charStatsRepository.create(newCharStats);
+  const charStats: any = charStatsRepository.create(newCharStats);
+
   await charStatsRepository.save(charStats);
-  const updateCharStats = createCharsStatsSchema.parse(charStats);
-  return updateCharStats;
+
+  return charStats;
 }
