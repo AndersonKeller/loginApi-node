@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
 
 import { createCharService } from "../services/chars/createChar.service";
-import { iChar, iMyChars } from "../interfaces/chars.interfaces";
+import { iChar, iCharSpell, iMyChars } from "../interfaces/chars.interfaces";
 import { getCharsService } from "../services/chars/getChars.service";
 import { getCharService } from "../services/chars/getChar.service";
 import { updateCharStatsService } from "../services/chars/updateCharStats.service";
 import { iCharStatsUpdate } from "../interfaces/charStats.interfaces";
-import { updateResistenceService } from "../services/chars/updateresistence.servicce";
+
 import {
   iResistence,
   iUpdateResistence,
 } from "../interfaces/resistence.interfaces";
+import { createCharSpellService } from "../services/chars/createCharSpell.service";
+import { updateResistenceService } from "../services/chars/updateresistence.servicce";
 
 export async function createCharControler(
   req: Request,
@@ -60,4 +62,13 @@ export async function updateResistenceController(
     resistenceData
   );
   return res.status(200).json(resistence);
+}
+export async function createCharSpellController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const spelldata = req.body;
+  const spell: iCharSpell = await createCharSpellService(charId, spelldata);
+  return res.status(201).json(spell);
 }

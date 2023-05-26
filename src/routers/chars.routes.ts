@@ -1,20 +1,22 @@
 import { Router } from "express";
 import {
   createCharControler,
+  createCharSpellController,
   getCharController,
   getCharsController,
   updateCharStatsController,
   updateResistenceController,
 } from "../controllers/chars.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
-import { createCharSchema } from "../schemas/chars.schemas";
-import { ensureTokenvalidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
 import {
-  createCharsStatsSchema,
-  updateCharStatsSchema,
-} from "../schemas/charStats.schemas";
+  createCharSchema,
+  createCharSpellSchema,
+} from "../schemas/chars.schemas";
+import { ensureTokenvalidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
+import { updateCharStatsSchema } from "../schemas/charStats.schemas";
 import { updateResistnceSchema } from "../schemas/resistence.schemas";
-import { ensureCharExistsMiddleware } from "../middlewares/ensureCharexists.middleware";
+import { ensureCharExistsMiddleware } from "../middlewares/ensureCharExists.middleware";
+
 export const charsRoutes: Router = Router();
 charsRoutes.post(
   "",
@@ -42,4 +44,11 @@ charsRoutes.patch(
   ensureCharExistsMiddleware,
   ensureDataIsValidMiddleware(updateResistnceSchema),
   updateResistenceController
+);
+charsRoutes.post(
+  "/:id/spell",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  ensureDataIsValidMiddleware(createCharSpellSchema),
+  createCharSpellController
 );
