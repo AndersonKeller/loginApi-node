@@ -46,4 +46,3 @@ export const returnCharSpellSchema = createCharSpellSchema
     spells: returnSpellSchema.omit({ types: true }),
   })
   .omit({ name: true });
-export const returnAllCharSpellSchema = returnCharSpellSchema.array();

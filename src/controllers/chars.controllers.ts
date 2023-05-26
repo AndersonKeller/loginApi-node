@@ -12,7 +12,7 @@ import {
   iUpdateResistence,
 } from "../interfaces/resistence.interfaces";
 import { createCharSpellService } from "../services/chars/createCharSpell.service";
-import { updateResistenceService } from "../services/chars/updateresistence.servicce";
+import { updateResistenceService } from "../services/chars/updateResistence.servicce";
 import { getSpellsByCharService } from "../services/chars/getSpellsByChar.service";
 import { CharSpells } from "../entities";
 
