@@ -10,3 +10,6 @@ export const classesSchema = createClassesSchema.extend({
   id: z.number(),
 });
 export const returnAllClassesSchema = classesSchema.array();
+export const returnClasseCharSchema = z.object({
+  name: z.string(),
+});

@@ -1,7 +1,20 @@
 import { Request, Response } from "express";
 
 import { createCharService } from "../services/chars/createChar.service";
-import { iChar } from "../interfaces/chars.interfaces";
+import { iChar, iCharSpell, iMyChars } from "../interfaces/chars.interfaces";
+import { getCharsService } from "../services/chars/getChars.service";
+import { getCharService } from "../services/chars/getChar.service";
+import { updateCharStatsService } from "../services/chars/updateCharStats.service";
+import { iCharStatsUpdate } from "../interfaces/charStats.interfaces";
+
+import {
+  iResistence,
+  iUpdateResistence,
+} from "../interfaces/resistence.interfaces";
+import { createCharSpellService } from "../services/chars/createCharSpell.service";
+import { updateResistenceService } from "../services/chars/updateResistence.servicce";
+import { getSpellsByCharService } from "../services/chars/getSpellsByChar.service";
+import { CharSpells } from "../entities";
 
 export async function createCharControler(
   req: Request,
@@ -11,4 +24,61 @@ export async function createCharControler(
   charData.user = req.user;
   const char: iChar = await createCharService(charData, req.user.id);
   return res.status(201).json(char);
+}
+export async function getCharsController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const id: number = req.user.id;
+  const chars: iMyChars = await getCharsService(id);
+  return res.status(200).json(chars);
+}
+export async function getCharController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const char = await getCharService(charId);
+  return res.status(200).json(char);
+}
+export async function updateCharStatsController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const statsData = req.body;
+  const char: iCharStatsUpdate = await updateCharStatsService(
+    statsData,
+    charId
+  );
+  return res.status(200).json(char);
+}
+export async function updateResistenceController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const resistenceData = req.body;
+  const resistence: iUpdateResistence = await updateResistenceService(
+    charId,
+    resistenceData
+  );
+  return res.status(200).json(resistence);
+}
+export async function createCharSpellController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId = parseInt(req.params.id);
+  const spelldata = req.body;
+  const spell: iCharSpell = await createCharSpellService(charId, spelldata);
+  return res.status(201).json(spell);
+}
+export async function getSpellsByCharController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId: number = parseInt(req.params.id);
+  const spells: CharSpells[] = await getSpellsByCharService(charId);
+  return res.status(200).json(spells);
 }

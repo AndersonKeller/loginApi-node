@@ -10,3 +10,6 @@ export const raceSchema = createRaceSchema.extend({
   id: z.number(),
 });
 export const returnAllRacesSchema = raceSchema.array();
+export const returnRaceChar = z.object({
+  name: z.string(),
+});

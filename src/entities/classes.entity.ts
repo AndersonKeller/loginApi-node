@@ -7,6 +7,8 @@ import {
   JoinColumn,
 } from "typeorm";
 import { Stats } from "./stats.entity";
+import { Equip } from "./equips.entity";
+import { Spell } from "./spells.entity";
 
 @Entity("classes")
 class Classes {
@@ -20,5 +22,9 @@ class Classes {
 
   @ManyToOne(() => Stats)
   stats: Stats;
+  @ManyToOne(() => Equip)
+  equip: Equip;
+  @ManyToOne(() => Spell)
+  spell: Spell;
 }
 export { Classes };

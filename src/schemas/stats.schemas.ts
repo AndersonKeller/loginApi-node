@@ -20,3 +20,8 @@ export const createStatsSchema = z.object({
 export const statsSchema = createStatsSchema.extend({
   id: z.number(),
 });
+export const returnStatsCharSchema = z.object({
+  strength: z.number().int().optional().default(10),
+  inteligence: z.number().int().optional().default(10),
+  dexterity: z.number().int().optional().default(10),
+});
