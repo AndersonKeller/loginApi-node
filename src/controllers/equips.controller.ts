@@ -1,8 +1,13 @@
 import { Request, Response } from "express";
 import { createEquipService } from "../services/equips/createEquip.service";
-import { iEquip } from "../interfaces/equips.interfaces";
+import {
+  iEquip,
+  iEquipToChar,
+  iEquipToCharCreate,
+} from "../interfaces/equips.interfaces";
 import { Equip } from "../entities";
 import { getAllEquipsService } from "../services/equips/getAllEquips.service";
+import { equipToCharService } from "../services/equips/equipToChar.service";
 
 export async function createEquipController(
   req: Request,
@@ -18,4 +23,13 @@ export async function getAllEquipsController(
 ): Promise<Response> {
   const equips: Array<Equip> = await getAllEquipsService();
   return res.status(200).json(equips);
+}
+export async function equipToCharController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId: number = parseInt(req.params.id);
+  const equipData: iEquipToCharCreate = req.body;
+  const equipChar: iEquipToChar = await equipToCharService(charId, equipData);
+  return res.status(200).json(equipChar);
 }

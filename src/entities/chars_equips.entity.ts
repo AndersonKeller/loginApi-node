@@ -7,8 +7,8 @@ class CharEquips {
   @PrimaryGeneratedColumn("increment")
   id: number;
   @ManyToOne(() => Char)
-  char: Char[];
+  char: Char;
   @ManyToOne(() => Equip)
-  equips: Equip[];
+  equips: Equip;
 }
 export { CharEquips };

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { returnCharSchema } from "./chars.schemas";
 
 export enum equipType {
   weapon = "WEAPON",
@@ -18,4 +19,11 @@ export const createEquipSchema = z.object({
 });
 export const returnEquipSchema = createEquipSchema.extend({
   id: z.number(),
+});
+export const equipToCharSchema = z.object({
+  name: z.string(),
+});
+export const returnEquipToCharSchema = z.object({
+  char: z.string(),
+  equip: returnEquipSchema,
 });
