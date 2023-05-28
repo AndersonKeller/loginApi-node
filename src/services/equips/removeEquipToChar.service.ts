@@ -14,7 +14,7 @@ export async function removeEquipToCharService(
       id: equipCharId,
     },
   });
-  console.log(charEquipFind);
+
   if (!charEquipFind) {
     throw new AppError("Char not use this equip", 404);
   }

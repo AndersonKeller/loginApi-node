@@ -5,6 +5,7 @@ import {
   getCharController,
   getCharsController,
   getSpellsByCharController,
+  removeCharController,
   updateCharStatsController,
   updateResistenceController,
 } from "../controllers/chars.controllers";
@@ -58,4 +59,10 @@ charsRoutes.get(
   ensureTokenvalidMiddleware,
   ensureCharExistsMiddleware,
   getSpellsByCharController
+);
+charsRoutes.delete(
+  "/:id",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  removeCharController
 );
