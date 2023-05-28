@@ -3,6 +3,7 @@ import {
   createEquipController,
   equipToCharController,
   getAllEquipsController,
+  getEquipsByCharController,
   removeEquipToCharController,
 } from "../controllers/equips.controller";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
@@ -33,4 +34,10 @@ equipRoutes.delete(
   ensureTokenvalidMiddleware,
   ensureCharExistsMiddleware,
   removeEquipToCharController
+);
+equipRoutes.get(
+  "/char/:id",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  getEquipsByCharController
 );

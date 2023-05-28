@@ -36,7 +36,7 @@ class Char {
   user: User;
 
   @OneToMany(() => CharEquips, (CharEquips) => CharEquips.char)
-  equips: CharEquips;
+  equips: CharEquips[];
   @OneToMany(() => CharSpells, (CharSpells) => CharSpells.char)
   spells: CharSpells[];
 }
