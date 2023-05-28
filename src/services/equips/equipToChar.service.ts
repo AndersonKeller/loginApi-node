@@ -35,6 +35,7 @@ export async function equipToCharService(
   });
   await equipCharRepository.save(newCharEquip);
   const equip = {
+    id: newCharEquip.id,
     equip: equipFind!,
     char: charFind?.name,
   };

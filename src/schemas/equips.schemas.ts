@@ -24,6 +24,7 @@ export const equipToCharSchema = z.object({
   name: z.string(),
 });
 export const returnEquipToCharSchema = z.object({
+  id: z.number(),
   char: z.string(),
   equip: returnEquipSchema,
 });

@@ -8,6 +8,7 @@ import {
 import { Equip } from "../entities";
 import { getAllEquipsService } from "../services/equips/getAllEquips.service";
 import { equipToCharService } from "../services/equips/equipToChar.service";
+import { removeEquipToCharService } from "../services/equips/removeEquipToChar.service";
 
 export async function createEquipController(
   req: Request,
@@ -32,4 +33,14 @@ export async function equipToCharController(
   const equipData: iEquipToCharCreate = req.body;
   const equipChar: iEquipToChar = await equipToCharService(charId, equipData);
   return res.status(200).json(equipChar);
+}
+export async function removeEquipToCharController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId: number = parseInt(req.params.id);
+  const equipCharId: number = parseInt(req.params.equip);
+  console.log(equipCharId);
+  await removeEquipToCharService(charId, equipCharId);
+  return res.status(204).send();
 }
