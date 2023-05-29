@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createMonsterController } from "../controllers/monster.controller";
+import {
+  createMonsterController,
+  getAllMonstersController,
+} from "../controllers/monster.controller";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { createMonsterSchema } from "../schemas/monster.schemas";
 
@@ -10,3 +13,4 @@ monsterRoutes.post(
   ensureDataIsValidMiddleware(createMonsterSchema),
   createMonsterController
 );
+monsterRoutes.get("", getAllMonstersController);
