@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { SpellTypes } from "./spells_types";
 import { CharSpells } from "./chars_spells.entity";
+import { Monster } from "./monsters.entity";
 
 @Entity("spells")
 class Spell {

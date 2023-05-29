@@ -11,6 +11,7 @@ import { CharEquips } from "./chars_equips.entity";
 import { CharSpells } from "./chars_spells.entity";
 import { SpellTypes } from "./spells_types";
 import { Types } from "./types.entity";
+import { Monster } from "./monsters.entity";
 export {
   Spell,
   Types,
@@ -25,4 +26,5 @@ export {
   Equip,
   CharEquips,
   CharSpells,
+  Monster,
 };
