@@ -20,5 +20,8 @@ class Monster {
 
   @ManyToOne(() => Stats)
   stats: Stats;
+  @OneToOne(() => Resistence)
+  @JoinColumn()
+  resistence: Resistence;
 }
 export { Monster };

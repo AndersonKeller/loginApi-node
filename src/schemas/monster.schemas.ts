@@ -5,7 +5,7 @@ import { createStatsSchema } from "./stats.schemas";
 
 export const createMonsterSchema = z.object({
   name: z.string().max(52).min(3),
-
+  resistence: createResistenceSchema,
   stats: createStatsSchema,
 });
 export const returnMonsterSchema = createMonsterSchema.extend({

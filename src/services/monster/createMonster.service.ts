@@ -17,9 +17,11 @@ export async function createMonsterService(
 
   const newStats: Stats = statsRepository.create(monsterData.stats);
   await statsRepository.save(newStats);
-
-  const newMonster = {
+  const newRes = resistenceRepository.create(monsterData.resistence);
+  await resistenceRepository.save(newRes);
+  const newMonster: iMonsterCreate = {
     name: monsterData.name,
+    resistence: newRes,
     stats: newStats,
   };
   const monster: Monster = monsterRepository.create(newMonster);
