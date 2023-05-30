@@ -33,6 +33,8 @@ export async function createMonsterService(
     resistence: newRes,
     stats: newStats,
     spell: monsterData?.spell ? monsterData.spell : "",
+    level: monsterData.level,
+    rarity: monsterData.rarity,
   };
 
   const monster: Monster = monsterRepository.create({

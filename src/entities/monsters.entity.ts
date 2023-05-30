@@ -11,6 +11,7 @@ import {
 import { Resistence } from "./resistences.entity";
 import { Spell } from "./spells.entity";
 import { Stats } from "./stats.entity";
+import { rarityMonsterType } from "../schemas/monster.schemas";
 
 @Entity("monster")
 class Monster {
@@ -19,6 +20,10 @@ class Monster {
   @Column()
   name: string;
 
+  @Column()
+  level: number;
+  @Column({ type: "enum", enum: rarityMonsterType })
+  rarity: rarityMonsterType;
   @ManyToOne(() => Stats)
   stats: Stats;
   @OneToOne(() => Resistence)
