@@ -7,7 +7,11 @@ export const createMonsterSchema = z.object({
   name: z.string().max(52).min(3),
   resistence: createResistenceSchema,
   stats: createStatsSchema,
+  spell: z.string().optional(),
 });
-export const returnMonsterSchema = createMonsterSchema.extend({
-  id: z.number(),
-});
+export const returnMonsterSchema = createMonsterSchema
+  .extend({
+    id: z.number(),
+    spells: returnSpellSchema.omit({ types: true }).optional().array(),
+  })
+  .omit({ spell: true });

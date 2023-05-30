@@ -17,14 +17,29 @@ export async function createMonsterService(
 
   const newStats: Stats = statsRepository.create(monsterData.stats);
   await statsRepository.save(newStats);
-  const newRes = resistenceRepository.create(monsterData.resistence);
+  const newRes: Resistence = resistenceRepository.create(
+    monsterData.resistence
+  );
   await resistenceRepository.save(newRes);
+  const spellfind: Spell[] | [] = monsterData.spell
+    ? await spellsRepository.find({
+        where: {
+          name: monsterData.spell!,
+        },
+      })
+    : [];
   const newMonster: iMonsterCreate = {
     name: monsterData.name,
     resistence: newRes,
     stats: newStats,
+    spell: monsterData?.spell ? monsterData.spell : "",
   };
-  const monster: Monster = monsterRepository.create(newMonster);
+
+  const monster: Monster = monsterRepository.create({
+    spells: spellfind,
+    ...newMonster,
+  });
+
   await monsterRepository.save(monster);
 
   const returnMonster = returnMonsterSchema.parse(monster);

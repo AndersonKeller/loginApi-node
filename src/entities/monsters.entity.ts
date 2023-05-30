@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToOne,
@@ -23,5 +24,8 @@ class Monster {
   @OneToOne(() => Resistence)
   @JoinColumn()
   resistence: Resistence;
+  @ManyToMany(() => Spell)
+  @JoinTable()
+  spells: Spell[];
 }
 export { Monster };
