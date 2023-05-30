@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { createMonsterService } from "../services/monster/createMonster.service";
-import { iMonster } from "../interfaces/monster.interface";
+import { iMonster, iMonsterSpell } from "../interfaces/monster.interface";
 import { Monster } from "../entities";
 import { getAllMonstersService } from "../services/monster/getAllMonsters.service";
+import { createSpellToMonsterService } from "../services/monster/createSpellToMonster.service";
 
 export async function createMonsterController(
   req: Request,
@@ -18,4 +19,16 @@ export async function getAllMonstersController(
 ): Promise<Response> {
   const monsters: Monster[] = await getAllMonstersService();
   return res.status(200).json(monsters);
+}
+export async function createSpellToMonsterController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const monsterId: number = parseInt(req.params.id);
+  const spellData = req.body;
+  const spells: iMonsterSpell = await createSpellToMonsterService(
+    monsterId,
+    spellData
+  );
+  return res.status(201).json(spells);
 }

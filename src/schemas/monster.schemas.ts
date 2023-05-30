@@ -23,3 +23,31 @@ export const returnMonsterSchema = createMonsterSchema
     spells: returnSpellSchema.omit({ types: true }).optional().array(),
   })
   .omit({ spell: true });
+export const createSpellToMonsterSchema = z.object({
+  name: z.string(),
+});
+// export const returnCharSpellSchema = createCharSpellSchema
+//   .extend({
+//     id: z.number(),
+//     char: returnCharSchema.omit({
+//       classe: true,
+//       charsStats: true,
+//       resistences: true,
+//       race: true,
+//       user: true,
+//     }),
+//     spells: returnSpellSchema.omit({ types: true }),
+//   })
+//   .omit({ name: true });
+export const returnMonsterSpellSchema = createSpellToMonsterSchema
+  .extend({
+    id: z.number(),
+    monster: returnMonsterSchema.omit({
+      rarity: true,
+      stats: true,
+      resistence: true,
+      spells: true,
+    }),
+    spells: returnSpellSchema.omit({ types: true }).array(),
+  })
+  .omit({ name: true });
