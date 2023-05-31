@@ -16,6 +16,8 @@ import { updateResistenceService } from "../services/chars/updateResistence.serv
 import { getSpellsByCharService } from "../services/chars/getSpellsByChar.service";
 import { CharSpells } from "../entities";
 import { removeCharService } from "../services/chars/removeChar.service";
+import { createCharGearService } from "../services/chars/createCharGear.service";
+import { iCharGear } from "../interfaces/gear.interfaces";
 
 export async function createCharControler(
   req: Request,
@@ -96,4 +98,13 @@ export async function getCharGearController(
   res: Response
 ): Promise<Response> {
   return res.status(200).json();
+}
+export async function createCharGearController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const charId: number = parseInt(req.params.id);
+  const gearData = req.body;
+  const gear: iCharGear = await createCharGearService(charId, gearData);
+  return res.status(200).json(gear);
 }

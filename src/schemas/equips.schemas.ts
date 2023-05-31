@@ -42,3 +42,7 @@ export const returnEquipToCharSchema = z.object({
   char: z.string(),
   equip: returnEquipSchema,
 });
+export const equipGearSchema = z.object({
+  name: z.string(),
+  subtype: z.nativeEnum(subType),
+});
