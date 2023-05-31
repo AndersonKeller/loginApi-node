@@ -91,3 +91,9 @@ export async function removeCharController(
   await removeCharService(charId);
   return res.status(204).send();
 }
+export async function getCharGearController(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  return res.status(200).json();
+}

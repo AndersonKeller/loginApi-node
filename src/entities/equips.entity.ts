@@ -8,7 +8,8 @@ import {
 } from "typeorm";
 
 import { CharEquips } from "./chars_equips.entity";
-import { equipType } from "../schemas/equips.schemas";
+import { equipType, subType } from "../schemas/equips.schemas";
+import { Gear } from "./gear.entity";
 
 @Entity("equips")
 class Equip {
@@ -18,6 +19,8 @@ class Equip {
   name: string;
   @Column({ type: "enum", enum: equipType })
   type: equipType;
+  @Column({ type: "enum", enum: subType })
+  subtype: subType;
   @Column({ nullable: true })
   description?: string;
   @Column({ nullable: true })

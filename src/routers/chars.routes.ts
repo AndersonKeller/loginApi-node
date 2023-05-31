@@ -3,6 +3,7 @@ import {
   createCharControler,
   createCharSpellController,
   getCharController,
+  getCharGearController,
   getCharsController,
   getSpellsByCharController,
   removeCharController,
@@ -65,4 +66,10 @@ charsRoutes.delete(
   ensureTokenvalidMiddleware,
   ensureCharExistsMiddleware,
   removeCharController
+);
+charsRoutes.get(
+  "/:id/gear",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  getCharGearController
 );

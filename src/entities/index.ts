@@ -12,8 +12,10 @@ import { CharSpells } from "./chars_spells.entity";
 import { SpellTypes } from "./spells_types";
 import { Types } from "./types.entity";
 import { Monster } from "./monsters.entity";
+import { Gear } from "./gear.entity";
 export {
   Spell,
+  Gear,
   Types,
   SpellTypes,
   User,
