@@ -14,10 +14,11 @@ import {
 import { createCharSpellService } from "../services/chars/createCharSpell.service";
 import { updateResistenceService } from "../services/chars/updateResistence.servicce";
 import { getSpellsByCharService } from "../services/chars/getSpellsByChar.service";
-import { CharSpells } from "../entities";
+import { Char, CharSpells, Gear } from "../entities";
 import { removeCharService } from "../services/chars/removeChar.service";
 import { createCharGearService } from "../services/chars/createCharGear.service";
 import { iCharGear } from "../interfaces/gear.interfaces";
+import { getCharGearservice } from "../services/chars/getCharGear.service";
 
 export async function createCharControler(
   req: Request,
@@ -41,7 +42,7 @@ export async function getCharController(
   res: Response
 ): Promise<Response> {
   const charId = parseInt(req.params.id);
-  const char = await getCharService(charId);
+  const char: iChar = await getCharService(charId);
   return res.status(200).json(char);
 }
 export async function updateCharStatsController(
@@ -97,7 +98,9 @@ export async function getCharGearController(
   req: Request,
   res: Response
 ): Promise<Response> {
-  return res.status(200).json();
+  const charId: number = parseInt(req.params.id);
+  const gear: Gear = await getCharGearservice(charId);
+  return res.status(200).json(gear);
 }
 export async function createCharGearController(
   req: Request,
