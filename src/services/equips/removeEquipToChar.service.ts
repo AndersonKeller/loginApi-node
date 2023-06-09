@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { CharEquips } from "../../entities";
+import { Char, CharEquips, Equip } from "../../entities";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors";
 
@@ -9,6 +9,7 @@ export async function removeEquipToCharService(
 ): Promise<void> {
   const charEquipsRepository: Repository<CharEquips> =
     AppDataSource.getRepository(CharEquips);
+
   const charEquipFind: CharEquips | null = await charEquipsRepository.findOne({
     where: {
       id: equipCharId,

@@ -9,7 +9,6 @@ import {
 
 import { CharEquips } from "./chars_equips.entity";
 import { equipType, subType } from "../schemas/equips.schemas";
-import { Gear } from "./gear.entity";
 
 @Entity("equips")
 class Equip {
