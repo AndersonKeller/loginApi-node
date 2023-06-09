@@ -17,6 +17,7 @@ import { Spell } from "./spells.entity";
 import { Equip } from "./equips.entity";
 import { CharEquips } from "./chars_equips.entity";
 import { CharSpells } from "./chars_spells.entity";
+import { Gear } from "./gear.entity";
 
 @Entity("chars")
 class Char {
@@ -36,7 +37,7 @@ class Char {
   user: User;
 
   @OneToMany(() => CharEquips, (CharEquips) => CharEquips.char)
-  equips: CharEquips;
+  equips: CharEquips[];
   @OneToMany(() => CharSpells, (CharSpells) => CharSpells.char)
   spells: CharSpells[];
 }

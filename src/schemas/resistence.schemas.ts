@@ -8,7 +8,6 @@ export const createResistenceSchema = z.object({
 });
 export const returnResistenceSchema = createResistenceSchema.extend({
   id: z.number(),
-  char: returnCharSchema,
 });
 export const updateResistnceSchema = z.object({
   fire: z.number().optional(),

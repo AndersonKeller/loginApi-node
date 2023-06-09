@@ -8,6 +8,7 @@ import {
   Char,
   CharStats,
   Classes,
+  Gear,
   Race,
   Resistence,
   Stats,
@@ -26,6 +27,7 @@ export async function createCharService(
 ): Promise<iChar> {
   const charRepository: Repository<Char> = AppDataSource.getRepository(Char);
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
+  const gearRepository: Repository<Gear> = AppDataSource.getRepository(Gear);
   const classesRepository: Repository<Classes> =
     AppDataSource.getRepository(Classes);
   const raceRepository: Repository<Race> = AppDataSource.getRepository(Race);
@@ -98,6 +100,11 @@ export async function createCharService(
   await resistenceRepository.save(resistence);
   char.charsStats = charStats;
   char.resistences = resistence;
-  const createChar: iChar = returnCharSchema.parse(char);
+
+  const newGear: Gear = gearRepository.create({
+    char: char,
+  });
+  await gearRepository.save(newGear);
+  const createChar = returnCharSchema.parse(char);
   return createChar;
 }

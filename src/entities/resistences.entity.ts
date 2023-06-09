@@ -23,8 +23,8 @@ class Resistence {
   @Column()
   lighting: number;
 
-  @OneToOne(() => Char)
+  @OneToOne(() => Char, { nullable: true })
   @JoinColumn()
-  char: Char;
+  char: Char | null;
 }
 export { Resistence };

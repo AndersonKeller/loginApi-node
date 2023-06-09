@@ -1,10 +1,13 @@
 import { Router } from "express";
 import {
   createCharControler,
+  createCharGearController,
   createCharSpellController,
   getCharController,
+  getCharGearController,
   getCharsController,
   getSpellsByCharController,
+  removeCharController,
   updateCharStatsController,
   updateResistenceController,
 } from "../controllers/chars.controllers";
@@ -17,6 +20,7 @@ import { ensureTokenvalidMiddleware } from "../middlewares/ensureTokenIsValid.mi
 import { updateCharStatsSchema } from "../schemas/charStats.schemas";
 import { updateResistnceSchema } from "../schemas/resistence.schemas";
 import { ensureCharExistsMiddleware } from "../middlewares/ensureCharExists.middleware";
+import { createCharGearSchema } from "../schemas/gear.schemas";
 
 export const charsRoutes: Router = Router();
 charsRoutes.post(
@@ -58,4 +62,23 @@ charsRoutes.get(
   ensureTokenvalidMiddleware,
   ensureCharExistsMiddleware,
   getSpellsByCharController
+);
+charsRoutes.delete(
+  "/:id",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  removeCharController
+);
+charsRoutes.get(
+  "/:id/gear",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  getCharGearController
+);
+charsRoutes.patch(
+  "/:id/gear",
+  ensureTokenvalidMiddleware,
+  ensureCharExistsMiddleware,
+  ensureDataIsValidMiddleware(createCharGearSchema),
+  createCharGearController
 );

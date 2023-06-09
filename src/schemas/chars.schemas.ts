@@ -2,8 +2,14 @@ import { z } from "zod";
 import { returnUserCharSchema, returnUserSchema } from "./users.schemas";
 import { raceSchema, returnRaceChar } from "./races.schemas";
 import { classesSchema, returnClasseCharSchema } from "./classes.schemas";
-import { createResistenceSchema } from "./resistence.schemas";
-import { createCharsStatsSchema } from "./charStats.schemas";
+import {
+  createResistenceSchema,
+  returnResistenceSchema,
+} from "./resistence.schemas";
+import {
+  createCharsStatsSchema,
+  returnCharStatsSchema,
+} from "./charStats.schemas";
 import { returnSpellSchema } from "./spells.schemas";
 
 export const createCharSchema = z.object({
@@ -13,8 +19,8 @@ export const createCharSchema = z.object({
 });
 
 export const returnCharSchema = z.object({
-  name: z.string().max(52).min(3, "name of char must be 3 characters"),
   id: z.number(),
+  name: z.string().max(52),
   user: returnUserCharSchema,
   race: returnRaceChar,
   classe: returnClasseCharSchema,
